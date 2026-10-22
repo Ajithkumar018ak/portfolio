@@ -142,14 +142,26 @@
     transition: width .3s ease;
 }
 
-.nox-about-page .desktop-navigation a:hover,
-.nox-about-page .desktop-navigation a.active {
+.nox-about-page .desktop-navigation a:hover:not(.active),
+.nox-about-page .desktop-nav a:hover:not(.active) {
     color: #fff;
 }
 
-.nox-about-page .desktop-navigation a:hover::after,
-.nox-about-page .desktop-navigation a.active::after {
+.nox-about-page .desktop-navigation a:hover:not(.active)::after,
+.nox-about-page .desktop-nav a:hover:not(.active)::after {
     width: 100%;
+}
+
+.nox-about-page .desktop-navigation a.active,
+.nox-about-page .desktop-nav a.active {
+    color: var(--about-orange, #ff6b35) !important;
+}
+
+.nox-about-page .desktop-navigation a.active::after,
+.nox-about-page .desktop-nav a.active::after {
+    width: 100% !important;
+    background: var(--about-orange, #ff6b35) !important;
+    opacity: 1 !important;
 }
 
 .nox-about-page .header-actions {

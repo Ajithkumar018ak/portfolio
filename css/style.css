@@ -6117,78 +6117,79 @@ z-index: 9999;
 
 
 
+/* =====================================================
+   NOX CREATIVE STUDIO — ACTIVE NAVIGATION STYLES
+===================================================== */
+
 .desktop-nav a {
     position: relative;
     display: inline-block;
-    padding: 10px 0;
-    color: #a6a6a6;
+    padding: 8px 0;
+    color: #a4a4ac;
     text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    transition: color 0.25s ease;
 }
 
 .desktop-nav a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 3px;
-    width: 0;
+    bottom: -3px;
+    width: 100%;
     height: 2px;
     background: #ff6b35;
-    transition: width 0.35s ease;
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
 }
 
-.desktop-nav a:hover,
-.desktop-nav a.active {
+/* Distinguishable Hover state on inactive links */
+.desktop-nav a:hover:not(.active):not([aria-current="page"]) {
     color: #ffffff;
 }
 
-.desktop-nav a:hover::after,
-.desktop-nav a.active::after {
-    width: 100%;
+.desktop-nav a:hover:not(.active):not([aria-current="page"])::after {
+    transform: scaleX(1);
+    opacity: 0.6;
+    background: rgba(255, 255, 255, 0.7);
 }
 
-
-
-
-
-
-
-
-
-/* FIX: Active link underline stays visible while scrolling */
-
-.desktop-nav a {
-    position: relative;
-    text-decoration: none;
-}
-
-.desktop-nav a.active {
+/* Distinguishable Active state */
+.desktop-nav a.active,
+.desktop-nav a[aria-current="page"] {
     color: #ff6b35 !important;
+    font-weight: 600;
 }
 
-.desktop-nav a.active::after {
+.desktop-nav a.active::after,
+.desktop-nav a[aria-current="page"]::after {
     content: "";
     position: absolute;
-
     left: 0;
-    bottom: 3px;
-
+    bottom: -3px;
     width: 100% !important;
-    height: 2px;
-
+    height: 2px !important;
     background: #ff6b35 !important;
-
     opacity: 1 !important;
     visibility: visible !important;
     transform: scaleX(1) !important;
 }
 
-/* Keep underline visible on hover too */
+/* Hover on already active link */
+.desktop-nav a.active:hover,
+.desktop-nav a[aria-current="page"]:hover {
+    color: #ff8555 !important;
+}
 
-.desktop-nav a.active:hover::after {
-    width: 100% !important;
+.desktop-nav a.active:hover::after,
+.desktop-nav a[aria-current="page"]:hover::after {
+    background: #ff8555 !important;
     opacity: 1 !important;
     visibility: visible !important;
+    transform: scaleX(1) !important;
 }

@@ -400,14 +400,22 @@ input:focus-visible {
     transition: width .3s ease;
 }
 
-.desktop-nav a:hover,
-.desktop-nav a.active {
+.desktop-nav a:hover:not(.active) {
     color: white;
 }
 
-.desktop-nav a:hover::after,
-.desktop-nav a.active::after {
+.desktop-nav a:hover:not(.active)::after {
     width: 100%;
+}
+
+.desktop-nav a.active {
+    color: var(--orange, #ff6b35) !important;
+}
+
+.desktop-nav a.active::after {
+    width: 100% !important;
+    background: var(--orange, #ff6b35) !important;
+    opacity: 1 !important;
 }
 
 .header-actions {

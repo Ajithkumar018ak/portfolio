@@ -306,98 +306,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       5. MOBILE DRAWER
+       5. MOBILE DRAWER & ESC KEY
+       Centrally managed by main.js
     ===================================================== */
-
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileOverlay = document.getElementById("mobileOverlay");
-    const mobileDrawer = document.getElementById("mobileDrawer");
-    const drawerClose = document.getElementById("drawerClose");
-
-    let drawerOpen = false;
-    let lastFocusedElement = null;
-
-    function openDrawer() {
-
-        if (!mobileDrawer || !mobileOverlay || drawerOpen) return;
-
-        drawerOpen = true;
-        lastFocusedElement = document.activeElement;
-
-        mobileDrawer.classList.add("is-open");
-        mobileOverlay.classList.add("is-open");
-
-        mobileDrawer.setAttribute("aria-hidden", "false");
-        mobileOverlay.setAttribute("aria-hidden", "false");
-
-        if (menuToggle) {
-            menuToggle.setAttribute("aria-expanded", "true");
-        }
-
-        document.body.classList.add("about-drawer-open");
-
-        if (drawerClose) {
-            drawerClose.focus();
-        }
-    }
-
-    function closeDrawer() {
-
-        if (!mobileDrawer || !mobileOverlay || !drawerOpen) return;
-
-        drawerOpen = false;
-
-        mobileDrawer.classList.remove("is-open");
-        mobileOverlay.classList.remove("is-open");
-
-        mobileDrawer.setAttribute("aria-hidden", "true");
-        mobileOverlay.setAttribute("aria-hidden", "true");
-
-        if (menuToggle) {
-            menuToggle.setAttribute("aria-expanded", "false");
-        }
-
-        document.body.classList.remove("about-drawer-open");
-
-        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-            lastFocusedElement.focus();
-        }
-    }
-
-    if (menuToggle) {
-        menuToggle.addEventListener("click", () => {
-            if (drawerOpen) {
-                closeDrawer();
-            } else {
-                openDrawer();
-            }
-        });
-    }
-
-    if (drawerClose) {
-        drawerClose.addEventListener("click", closeDrawer);
-    }
-
-    if (mobileOverlay) {
-        mobileOverlay.addEventListener("click", closeDrawer);
-    }
-
-    if (mobileDrawer) {
-
-        mobileDrawer.querySelectorAll("a").forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                if (link.getAttribute("href")?.startsWith("#")) {
-                    closeDrawer();
-                }
-
-            });
-
-        });
-
-    }
-
 
     /* =====================================================
        6. LOGIN MODAL
@@ -408,23 +319,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     /* No duplicate listeners needed here. */
-
-
-    /* =====================================================
-       10. ESCAPE KEY
-    ===================================================== */
-
-    document.addEventListener("keydown", event => {
-
-        if (event.key !== "Escape") return;
-
-        /* Login modal ESC is handled by main.js */
-
-        if (drawerOpen) {
-            closeDrawer();
-        }
-
-    });
 
 
     /* =====================================================

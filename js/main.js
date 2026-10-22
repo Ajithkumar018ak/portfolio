@@ -317,35 +317,43 @@ const drawerClose = $("#drawerClose");
 function openDrawer() {
     if (!mobileDrawer || !mobileOverlay) return;
 
-    mobileDrawer.classList.add("active", "open");
-    mobileOverlay.classList.add("active", "open");
+    mobileDrawer.classList.add("active", "open", "is-open");
+    mobileOverlay.classList.add("active", "open", "is-open");
 
     menuToggle?.classList.add("active");
+    menuToggle?.setAttribute("aria-expanded", "true");
+    menuToggle?.setAttribute("aria-label", "Close navigation");
 
     mobileDrawer.setAttribute("aria-hidden", "false");
+    mobileOverlay.setAttribute("aria-hidden", "false");
 
-    menuToggle?.setAttribute("aria-expanded", "true");
+    document.body.classList.add("drawer-open", "about-drawer-open");
 
-    document.body.classList.add("drawer-open");
+    // Optional: focus close button for accessibility
+    drawerClose?.focus();
 }
 
 function closeDrawer() {
-    mobileDrawer?.classList.remove("active", "open");
-    mobileOverlay?.classList.remove("active", "open");
+    if (!mobileDrawer || !mobileOverlay) return;
+
+    mobileDrawer.classList.remove("active", "open", "is-open");
+    mobileOverlay.classList.remove("active", "open", "is-open");
 
     menuToggle?.classList.remove("active");
-
-    mobileDrawer?.setAttribute("aria-hidden", "true");
-
     menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", "Open navigation");
 
-    document.body.classList.remove("drawer-open");
+    mobileDrawer.setAttribute("aria-hidden", "true");
+    mobileOverlay.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("drawer-open", "about-drawer-open");
 }
 
 menuToggle?.addEventListener("click", () => {
     const isOpen =
         mobileDrawer?.classList.contains("active") ||
-        mobileDrawer?.classList.contains("open");
+        mobileDrawer?.classList.contains("open") ||
+        mobileDrawer?.classList.contains("is-open");
 
     if (isOpen) {
         closeDrawer();
@@ -358,7 +366,7 @@ drawerClose?.addEventListener("click", closeDrawer);
 
 mobileOverlay?.addEventListener("click", closeDrawer);
 
-$$("#mobileDrawer a, #mobileDrawer .login-trigger")
+$$("#mobileDrawer nav a, #mobileDrawer a, #mobileDrawer .drawer-project")
     .forEach(link => {
         link.addEventListener("click", closeDrawer);
     });
@@ -607,8 +615,21 @@ attachLogin(
 document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
 
-    closeLoginModal();
-    closeDrawer();
+    const loginModal = document.getElementById("loginModal");
+    if (loginModal && loginModal.classList.contains("active")) {
+        loginModal.classList.remove("active");
+        loginModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("login-modal-open");
+    }
+
+    const isDrawerOpen =
+        mobileDrawer?.classList.contains("active") ||
+        mobileDrawer?.classList.contains("open") ||
+        mobileDrawer?.classList.contains("is-open");
+
+    if (isDrawerOpen) {
+        closeDrawer();
+    }
 });
 
 
@@ -954,56 +975,7 @@ console.log("NOX Creative Studio JavaScript initialized.");
 
 
 
-/* ============================================
-   NOX — KEEP HOME LINK ALWAYS ACTIVE
-============================================ */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    const desktopLinks = document.querySelectorAll(
-        ".desktop-nav a"
-    );
-
-    const mobileLinks = document.querySelectorAll(
-        "#mobileDrawer nav a"
-    );
-
-    function keepHomeActive() {
-
-        desktopLinks.forEach(link => {
-            link.classList.toggle(
-                "active",
-                link.getAttribute("href") === "#home"
-            );
-        });
-
-        mobileLinks.forEach(link => {
-            link.classList.toggle(
-                "active",
-                link.getAttribute("href") === "#home"
-            );
-        });
-
-    }
-
-    // Page load
-    keepHomeActive();
-
-    // Scroll pannalum Home active
-    window.addEventListener("scroll", keepHomeActive, {
-        passive: true
-    });
-
-    // Menu click pannalum Home active
-    desktopLinks.forEach(link => {
-        link.addEventListener("click", keepHomeActive);
-    });
-
-    mobileLinks.forEach(link => {
-        link.addEventListener("click", keepHomeActive);
-    });
-
-});
 
 
 
@@ -1341,38 +1313,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* =========================================
    AUTOMATIC ACTIVE NAVIGATION
+   Detects current page across desktop & mobile nav
 ========================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    const navLinks = document.querySelectorAll(".desktop-nav a");
-
-    let currentPage = window.location.pathname
-        .split("/")
-        .pop()
-        .toLowerCase();
-
-    if (currentPage === "" || currentPage === "/") {
-        currentPage = "index.html";
+(function () {
+    function normalizePageName(url) {
+        if (!url) return "index.html";
+        const clean = url.replace(/\\/g, "/").split(/[?#]/)[0];
+        let file = clean.substring(clean.lastIndexOf("/") + 1).toLowerCase().trim();
+        if (!file || file === "index" || file === "index.html") {
+            return "index.html";
+        }
+        if (!file.includes(".")) {
+            return file + ".html";
+        }
+        return file;
     }
 
-    navLinks.forEach(function (link) {
+    function initActiveNav() {
+        const currentPage = normalizePageName(window.location.pathname);
+        const navLinks = document.querySelectorAll(
+            ".desktop-nav a, #mobileDrawer nav a"
+        );
 
-        const linkPage = link
-            .getAttribute("href")
-            .split("/")
-            .pop()
-            .toLowerCase();
+        if (!navLinks.length) return;
 
-        if (linkPage === currentPage) {
-            link.classList.add("active");
-        } else {
-            link.classList.remove("active");
-        }
+        navLinks.forEach(link => {
+            const href = link.getAttribute("href");
+            if (!href) return;
 
-    });
+            // Skip external protocols
+            if (/^(https?:|mailto:|tel:|javascript:)/i.test(href)) return;
 
-});
+            const linkPage = normalizePageName(href);
+            const isMatch = linkPage === currentPage;
+
+            if (isMatch) {
+                link.classList.add("active");
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.classList.remove("active");
+                link.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initActiveNav);
+    } else {
+        initActiveNav();
+    }
+})();
 
 
 

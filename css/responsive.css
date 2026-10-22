@@ -219,33 +219,66 @@ p {
     min-height: 66px;
     width: 100%;
     padding: 16px 0;
+    position: relative;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
 
-    color: #f5f5f5;
+    color: #e2e2e6;
     text-decoration: none;
     text-transform: capitalize;
 
     font-size: clamp(20px, 5vw, 27px);
     font-weight: 600;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-    transition: color 0.25s ease;
+    transition: color 0.25s ease, padding-left 0.25s ease, border-color 0.25s ease;
 }
 
 .mobile-drawer nav a span {
-    color: #929292;
+    color: #888892;
     font-size: 11px;
     letter-spacing: 1px;
+    font-weight: 500;
+    transition: color 0.25s ease;
 }
 
-.mobile-drawer nav a:hover,
-.mobile-drawer nav a.active {
-    color: #ff7448;
+.mobile-drawer nav a:hover:not(.active):not([aria-current="page"]) {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+.mobile-drawer nav a:hover:not(.active):not([aria-current="page"]) span {
+    color: #c4c4cc;
+}
+
+.mobile-drawer nav a.active,
+.mobile-drawer nav a[aria-current="page"] {
+    color: #ff6b35 !important;
+    padding-left: 14px;
+    border-bottom-color: rgba(255, 107, 53, 0.25);
+}
+
+.mobile-drawer nav a.active::before,
+.mobile-drawer nav a[aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 22px;
+    background: #ff6b35;
+    border-radius: 2px;
+}
+
+.mobile-drawer nav a.active span,
+.mobile-drawer nav a[aria-current="page"] span {
+    color: #ff6b35 !important;
+    font-weight: 600;
 }
 
 .drawer-project {
