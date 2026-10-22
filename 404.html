@@ -1,0 +1,2108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>404 — NOX Creative Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================
+   RESET
+========================================= */
+
+:root {
+    --bg: #090909;
+    --white: #f5f2ed;
+    --muted: #97918b;
+    --orange: #ff6b35;
+    --line: rgba(255,255,255,.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--white);
+    font-family: "DM Sans", sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+/* =========================================
+   CINEMATIC INTRO SCREEN
+========================================= */
+
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #080808;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.intro-screen.finished {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-content {
+    width: min(90%, 760px);
+    text-align: center;
+    perspective: 1400px;
+}
+
+.intro-brand {
+    margin-bottom: 38px;
+    opacity: 0;
+    animation: introText .8s ease .3s forwards;
+}
+
+.intro-brand strong {
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    letter-spacing: 6px;
+}
+
+.intro-brand span {
+    color: var(--orange);
+}
+
+.intro-brand small {
+    display: block;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 4px;
+}
+
+/* =========================================
+   3D LAPTOP INTRO
+========================================= */
+
+.intro-laptop-scene {
+    position: relative;
+    width: min(100%, 530px);
+    height: 310px;
+    margin: 0 auto;
+
+    perspective: 1300px;
+    transform-style: preserve-3d;
+}
+
+.intro-laptop {
+    position: absolute;
+    width: 310px;
+    height: 210px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -43%) rotateX(8deg) rotateY(-10deg);
+
+    transform-style: preserve-3d;
+}
+
+/* Screen is initially closed */
+
+.intro-laptop-screen {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    left: 0;
+    bottom: 14px;
+
+    transform-origin: bottom center;
+    transform: rotateX(-90deg);
+
+    transform-style: preserve-3d;
+
+    border: 7px solid #41403e;
+    border-radius: 13px 13px 5px 5px;
+
+    background: #111;
+
+    box-shadow:
+        0 0 0 1px #77716a,
+        0 20px 40px rgba(0,0,0,.6);
+
+    overflow: hidden;
+
+    animation: laptopOpen 1.5s cubic-bezier(.2,.8,.2,1) 1.4s forwards;
+}
+
+.intro-screen-content {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,107,53,.2),
+            transparent 60%
+        ),
+        #101010;
+}
+
+.intro-screen-content strong {
+    font-family: "Manrope", sans-serif;
+    font-size: 48px;
+    letter-spacing: -4px;
+}
+
+.intro-screen-content strong span {
+    color: var(--orange);
+}
+
+.intro-screen-content small {
+    margin-top: 12px;
+    color: #b4ada5;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+.intro-screen-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,.12),
+        transparent 70%
+    );
+
+    transform: translateX(-120%);
+    animation: screenShine 2s ease-in-out 3s infinite;
+}
+
+/* Laptop keyboard base */
+
+.intro-laptop-base {
+    position: absolute;
+    width: 340px;
+    height: 22px;
+
+    top: calc(100% - 3px);
+    left: 50%;
+
+    transform: translateX(-50%) rotateX(65deg);
+    transform-origin: top center;
+
+    border-radius: 4px 4px 12px 12px;
+
+    background: linear-gradient(
+        180deg,
+        #77716b,
+        #33312f 45%,
+        #181716
+    );
+
+    box-shadow:
+        0 14px 20px rgba(0,0,0,.5),
+        inset 0 2px 1px rgba(255,255,255,.3);
+}
+
+.intro-keyboard {
+    position: absolute;
+    top: 3px;
+    left: 45px;
+    width: 250px;
+    height: 11px;
+
+    background: repeating-linear-gradient(
+        90deg,
+        #171615 0,
+        #171615 7px,
+        #55504b 8px,
+        #171615 9px
+    );
+}
+
+.intro-trackpad {
+    position: absolute;
+    width: 54px;
+    height: 7px;
+    left: 143px;
+    bottom: 0;
+
+    border: 1px solid #77716b;
+    border-radius: 2px;
+}
+
+.intro-laptop-shadow {
+    position: absolute;
+
+    left: 50%;
+    bottom: 10px;
+
+    width: 300px;
+    height: 25px;
+
+    transform: translateX(-50%);
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.8);
+    filter: blur(18px);
+
+    animation: shadowAppear .8s ease .8s forwards;
+    opacity: 0;
+}
+
+/* Laptop opening */
+
+@keyframes laptopOpen {
+    0% {
+        transform: rotateX(-90deg);
+    }
+
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes screenShine {
+    to {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes shadowAppear {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes introText {
+    to {
+        opacity: 1;
+    }
+}
+
+.intro-caption {
+    margin-top: 32px;
+
+    color: #a7a09a;
+
+    font-size: 10px;
+    letter-spacing: 3px;
+
+    opacity: 0;
+    animation: introText .8s ease 2s forwards;
+}
+
+.intro-progress {
+    width: 180px;
+    height: 2px;
+
+    margin: 20px auto 0;
+
+    background: #282523;
+    overflow: hidden;
+}
+
+.intro-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+
+    background: var(--orange);
+
+    animation: loadProgress 3.5s ease forwards;
+}
+
+@keyframes loadProgress {
+    to {
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.error-page {
+    position: relative;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(.97);
+
+    transition:
+        opacity 1s ease,
+        transform 1.2s cubic-bezier(.2,.8,.2,1),
+        visibility 1s ease;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(255,107,53,.07),
+            transparent 45%
+        ),
+        #090909;
+}
+
+.error-page.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.grid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+
+    background-size: 65px 65px;
+
+    mask-image: radial-gradient(ellipse at center, #000, transparent 85%);
+}
+
+.glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+    filter: blur(110px);
+
+    pointer-events: none;
+    z-index: -2;
+}
+
+.glow-one {
+    left: -200px;
+    top: 20%;
+    background: var(--orange);
+    opacity: .13;
+    animation: glowFloat 10s ease-in-out infinite alternate;
+}
+
+.glow-two {
+    right: -200px;
+    bottom: -200px;
+    background: #f3e4d5;
+    opacity: .07;
+    animation: glowFloat 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes glowFloat {
+    to {
+        transform: translate(100px, -80px);
+    }
+}
+
+/* =========================================
+   FLOATING OBJECTS
+========================================= */
+
+.floating {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.camera {
+    left: 8%;
+    top: 23%;
+
+    width: 72px;
+    height: 48px;
+
+    border-radius: 9px;
+    border: 1px solid #55504b;
+
+    background: linear-gradient(145deg, #393633, #111);
+
+    box-shadow: 10px 18px 30px rgba(0,0,0,.5);
+
+    animation: cameraMove 8s ease-in-out infinite;
+}
+
+.camera::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 13px;
+
+    width: 27px;
+    height: 8px;
+
+    background: #302d2b;
+    border: 1px solid #55504b;
+    border-radius: 4px 4px 0 0;
+}
+
+.camera::after {
+    content: "";
+    position: absolute;
+
+    top: 11px;
+    left: 24px;
+
+    width: 23px;
+    height: 23px;
+
+    border: 4px solid #4a4540;
+    border-radius: 50%;
+
+    background: radial-gradient(circle, #ff986d, #111 65%);
+}
+
+.cube {
+    top: 24%;
+    right: 12%;
+
+    width: 43px;
+    height: 43px;
+
+    border: 1px solid rgba(255,107,53,.7);
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,107,53,.18),
+        rgba(255,107,53,.01)
+    );
+
+    animation: cubeMove 9s ease-in-out infinite;
+}
+
+.ring {
+    top: 65%;
+    right: 8%;
+
+    width: 60px;
+    height: 60px;
+
+    border: 7px solid rgba(255,255,255,.1);
+    border-right-color: var(--orange);
+    border-radius: 50%;
+
+    animation: ringMove 10s linear infinite;
+}
+
+.tablet {
+    bottom: 17%;
+    left: 12%;
+
+    width: 54px;
+    height: 73px;
+
+    border: 2px solid #4b4641;
+    border-radius: 8px;
+
+    background: linear-gradient(145deg, #33302d, #111);
+
+    box-shadow: 10px 12px 24px rgba(0,0,0,.4);
+
+    animation: tabletMove 7s ease-in-out infinite;
+}
+
+.tablet::after {
+    content: "";
+    position: absolute;
+    inset: 8px 5px;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    background: linear-gradient(
+        160deg,
+        rgba(255,107,53,.2),
+        transparent
+    );
+}
+
+.cross {
+    top: 16%;
+    right: 29%;
+
+    color: var(--orange);
+    font-size: 26px;
+
+    animation: ringMove 8s linear infinite;
+}
+
+.particle {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+    background: var(--orange);
+
+    box-shadow: 0 0 18px var(--orange);
+
+    animation: particleMove 5s ease-in-out infinite;
+}
+
+.particle-one {
+    top: 35%;
+    left: 28%;
+}
+
+.particle-two {
+    right: 26%;
+    bottom: 27%;
+    animation-delay: 1.2s;
+}
+
+@keyframes cameraMove {
+    0%, 100% {
+        transform: translateY(0) rotate(-10deg) rotateY(-10deg);
+    }
+    50% {
+        transform: translateY(-28px) rotate(8deg) rotateY(15deg);
+    }
+}
+
+@keyframes cubeMove {
+    0%, 100% {
+        transform: translateY(0) rotate(25deg);
+    }
+    50% {
+        transform: translateY(-35px) rotate(90deg);
+    }
+}
+
+@keyframes ringMove {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+    50% {
+        transform: translateY(-25px) rotate(180deg);
+    }
+}
+
+@keyframes tabletMove {
+    0%, 100% {
+        transform: translateY(0) rotate(-13deg);
+    }
+    50% {
+        transform: translateY(-22px) rotate(4deg);
+    }
+}
+
+@keyframes particleMove {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: .5;
+    }
+    50% {
+        transform: translateY(-28px) scale(1.5);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    position: relative;
+    z-index: 10;
+
+    min-height: 80px;
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.brand-icon span {
+    color: var(--orange);
+}
+
+.brand-info strong {
+    display: block;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.brand-info small {
+    display: block;
+    margin-top: 4px;
+
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #bdb6af;
+    font-size: 9px;
+    letter-spacing: 1.6px;
+}
+
+.status i {
+    width: 6px;
+    height: 6px;
+
+    background: var(--orange);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--orange);
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.main-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+
+    padding: 35px 7% 45px;
+
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.copy {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.error-page.visible .copy {
+    animation: revealCopy .9s ease .4s forwards;
+}
+
+@keyframes revealCopy {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 28px;
+
+    color: #ff9b76;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 25px;
+    height: 1px;
+    background: var(--orange);
+}
+
+.error-number {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    margin-bottom: 25px;
+
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(90px, 12vw, 150px);
+    font-weight: 800;
+    line-height: .8;
+    letter-spacing: -10px;
+}
+
+.four {
+    color: var(--white);
+}
+
+.four.last {
+    color: #77716b;
+}
+
+/* =========================================
+   DOOR INSIDE THE ZERO
+========================================= */
+
+.zero {
+    position: relative;
+
+    width: .76em;
+    height: .76em;
+    flex-shrink: 0;
+
+    border: 7px solid var(--orange);
+    border-radius: 50%;
+
+    background: #1a100c;
+
+    box-shadow:
+        0 0 25px rgba(255,107,53,.12),
+        inset 0 0 20px rgba(255,107,53,.1);
+
+    overflow: hidden;
+}
+
+.door-light {
+    position: absolute;
+    inset: 5%;
+
+    background: radial-gradient(
+        ellipse at center,
+        #ffae80,
+        rgba(255,107,53,.3) 45%,
+        transparent 75%
+    );
+
+    opacity: 0;
+
+    transition: opacity .5s ease;
+}
+
+.door {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 25%;
+    bottom: 0;
+
+    width: 50%;
+    height: 76%;
+
+    border: 1px solid #ffb08c;
+    border-bottom: 0;
+    border-radius: 45% 45% 0 0;
+
+    background: linear-gradient(
+        90deg,
+        #562313,
+        #a94724,
+        #542112
+    );
+
+    transform-origin: left center;
+
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.door::before {
+    content: "";
+    position: absolute;
+    inset: 6px 4px 0;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-bottom: 0;
+    border-radius: 45% 45% 0 0;
+}
+
+.door::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 4px;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+    background: #ffe5cc;
+}
+
+/* Mini creative person */
+
+.person {
+    position: absolute;
+    z-index: 3;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 25%;
+    height: 45%;
+
+    opacity: 0;
+    transform: translate(-50%, 100%);
+
+    transition:
+        transform .8s cubic-bezier(.2,.8,.2,1),
+        opacity .5s ease;
+}
+
+.person-head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    width: 35%;
+    aspect-ratio: 1;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+    background: #e8b38f;
+}
+
+.person-hair {
+    position: absolute;
+    z-index: 2;
+
+    top: -2%;
+    left: 50%;
+
+    width: 41%;
+    height: 16%;
+
+    transform: translateX(-50%);
+
+    background: #211713;
+    border-radius: 60% 60% 20% 20%;
+}
+
+.person-body {
+    position: absolute;
+    top: 29%;
+    left: 50%;
+
+    width: 65%;
+    height: 70%;
+
+    transform: translateX(-50%);
+
+    border-radius: 5px 5px 0 0;
+
+    background: linear-gradient(
+        90deg,
+        #ce4725,
+        #ff8b5b,
+        #b43a1b
+    );
+}
+
+.person-body::before,
+.person-body::after {
+    content: "";
+    position: absolute;
+    top: 25%;
+
+    width: 25%;
+    height: 42%;
+
+    background: #e8b38f;
+    border-radius: 3px;
+}
+
+.person-body::before {
+    left: -17%;
+    transform: rotate(15deg);
+}
+
+.person-body::after {
+    right: -17%;
+    transform: rotate(-15deg);
+}
+
+/* Open the little door after page reveal */
+
+.error-page.door-open .door {
+    transform: perspective(100px) rotateY(-75deg);
+}
+
+.error-page.door-open .door-light {
+    opacity: 1;
+}
+
+.error-page.door-open .person {
+    opacity: 1;
+    transform: translate(-50%, 8%);
+}
+
+.subtitle {
+    margin-bottom: 14px;
+
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(21px, 2.5vw, 31px);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.subtitle span {
+    color: var(--orange);
+}
+
+.description {
+    max-width: 390px;
+    margin-bottom: 28px;
+
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.home-btn,
+.back-btn {
+    min-height: 47px;
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+}
+
+.home-btn {
+    background: var(--orange);
+    color: #fff;
+}
+
+.home-btn:hover {
+    background: #ed5928;
+    transform: translateY(-3px);
+}
+
+.home-btn span {
+    font-size: 16px;
+}
+
+.back-btn {
+    color: #e0dad3;
+    background: transparent;
+    border-color: rgba(255,255,255,.2);
+}
+
+.back-btn:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   MAIN LAPTOP SCENE
+========================================= */
+
+.laptop-scene {
+    position: relative;
+
+    width: 100%;
+    max-width: 570px;
+    aspect-ratio: 1.1 / 1;
+
+    margin: 0 auto;
+
+    perspective: 1200px;
+
+    opacity: 0;
+    transform: translateY(30px) scale(.92);
+}
+
+.error-page.visible .laptop-scene {
+    animation: revealLaptop 1.1s ease .15s forwards;
+}
+
+@keyframes revealLaptop {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.orbit {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+
+    width: 86%;
+    aspect-ratio: 1;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 50%;
+
+    transform: translate(-50%,-50%) rotateX(65deg);
+}
+
+.orbit::before {
+    content: "";
+    position: absolute;
+    inset: 13%;
+
+    border: 1px dashed rgba(255,107,53,.2);
+    border-radius: 50%;
+}
+
+.orbit::after {
+    content: "";
+    position: absolute;
+    inset: 27%;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 50%;
+}
+
+.main-laptop-wrap {
+    position: absolute;
+
+    width: 85%;
+    height: 60%;
+
+    top: 22%;
+    left: 7.5%;
+
+    transform-style: preserve-3d;
+
+    animation: floatingLaptop 6s ease-in-out 2.8s infinite;
+}
+
+.main-laptop {
+    position: absolute;
+    inset: 0;
+
+    transform-style: preserve-3d;
+    transform: rotateX(12deg) rotateY(-15deg) rotateZ(-2deg);
+}
+
+/* Screen begins closed */
+
+.main-laptop-screen {
+    position: absolute;
+
+    left: 8%;
+    top: 0;
+
+    width: 84%;
+    height: 76%;
+
+    border: 6px solid #494541;
+    border-bottom-width: 9px;
+    border-radius: 12px 12px 4px 4px;
+
+    background: #101010;
+
+    transform-origin: bottom center;
+    transform: rotateX(-90deg);
+
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 0 1px #68615a,
+        0 20px 40px rgba(0,0,0,.5);
+
+    animation: mainScreenOpen 1.5s cubic-bezier(.2,.8,.2,1) 1.8s forwards;
+}
+
+.main-laptop-screen::before {
+    content: "";
+    position: absolute;
+
+    z-index: 5;
+    top: -4px;
+    left: 50%;
+
+    width: 4px;
+    height: 4px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+    background: #69635d;
+}
+
+.main-screen-inner {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,107,53,.22),
+            transparent 60%
+        ),
+        #101010;
+}
+
+.main-screen-inner small {
+    margin-bottom: 12px;
+
+    color: #aaa19a;
+    font-size: 7px;
+    letter-spacing: 3px;
+}
+
+.main-screen-inner strong {
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(30px, 4.5vw, 53px);
+    letter-spacing: -4px;
+}
+
+.main-screen-inner strong span {
+    color: var(--orange);
+}
+
+.main-screen-inner em {
+    width: 45px;
+    height: 2px;
+
+    margin-top: 12px;
+
+    background: var(--orange);
+    box-shadow: 0 0 14px rgba(255,107,53,.6);
+}
+
+.main-screen-inner p {
+    margin-top: 11px;
+
+    color: #a59e97;
+    font-size: 7px;
+    letter-spacing: 2px;
+}
+
+.screen-glint {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        120deg,
+        transparent 25%,
+        rgba(255,255,255,.07) 45%,
+        transparent 65%
+    );
+
+    transform: translateX(-120%);
+    animation: screenGlint 3s ease-in-out 4s infinite;
+}
+
+/* Laptop base */
+
+.main-laptop-base {
+    position: absolute;
+
+    top: 73%;
+    left: 0;
+
+    width: 100%;
+    height: 16%;
+
+    border-radius: 4px 4px 15px 15px;
+
+    background: linear-gradient(
+        180deg,
+        #858079,
+        #494541 13%,
+        #272523 65%,
+        #111 100%
+    );
+
+    transform: rotateX(68deg);
+    transform-origin: top center;
+
+    box-shadow:
+        0 15px 20px rgba(0,0,0,.5),
+        inset 0 2px 1px rgba(255,255,255,.3);
+
+    opacity: 0;
+    animation: baseReveal .6s ease 3s forwards;
+}
+
+.main-keyboard {
+    position: absolute;
+    top: 12%;
+    left: 16%;
+
+    width: 68%;
+    height: 55%;
+
+    border-radius: 3px;
+
+    background: repeating-linear-gradient(
+        90deg,
+        #171615 0,
+        #171615 6px,
+        #45413c 7px,
+        #171615 8px
+    );
+}
+
+.main-trackpad {
+    position: absolute;
+
+    bottom: 7%;
+    left: 39%;
+
+    width: 22%;
+    height: 22%;
+
+    border: 1px solid #69635d;
+    border-radius: 2px;
+}
+
+.main-laptop-lip {
+    position: absolute;
+
+    left: 2%;
+    bottom: -2%;
+
+    width: 96%;
+    height: 4%;
+
+    border-radius: 0 0 18px 18px;
+    background: linear-gradient(#57514c, #1a1918);
+}
+
+.laptop-ground-shadow {
+    position: absolute;
+
+    bottom: 10%;
+    left: 13%;
+
+    width: 74%;
+    height: 10%;
+
+    border-radius: 50%;
+    background: #000;
+
+    filter: blur(20px);
+
+    animation: groundShadow 6s ease-in-out 3s infinite;
+}
+
+@keyframes mainScreenOpen {
+    to {
+        transform: rotateX(0);
+    }
+}
+
+@keyframes baseReveal {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes floatingLaptop {
+    0%, 100% {
+        transform: translateY(0) rotateZ(0);
+    }
+    50% {
+        transform: translateY(-11px) rotateZ(1deg);
+    }
+}
+
+@keyframes screenGlint {
+    0%, 15% {
+        transform: translateX(-120%);
+    }
+    50%, 100% {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes groundShadow {
+    0%, 100% {
+        opacity: .7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: .4;
+        transform: scale(.86);
+    }
+}
+
+.scene-label {
+    position: absolute;
+    z-index: 4;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(17,17,17,.88);
+
+    color: #c9c1b9;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.scene-label strong {
+    color: var(--orange);
+}
+
+.label-top {
+    top: 10%;
+    right: 0;
+
+    animation: labelFloat 5s ease-in-out infinite;
+}
+
+.label-bottom {
+    bottom: 18%;
+    left: 0;
+
+    animation: labelFloat 6s ease-in-out infinite reverse;
+}
+
+@keyframes labelFloat {
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    position: relative;
+    z-index: 5;
+
+    min-height: 65px;
+    padding: 15px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-top: 1px solid rgba(255,255,255,.09);
+}
+
+.footer p {
+    color: #858078;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    line-height: 1.8;
+}
+
+.footer p strong {
+    color: #e7e0d9;
+    font-weight: 500;
+}
+
+.footer-index {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #858078;
+    font-size: 8px;
+    letter-spacing: 1.2px;
+}
+
+.footer-index span {
+    color: var(--orange);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+
+        padding: 55px 7% 35px;
+    }
+
+    .copy {
+        text-align: center;
+    }
+
+    .eyebrow {
+        justify-content: center;
+    }
+
+    .error-number {
+        justify-content: center;
+        font-size: clamp(95px, 18vw, 145px);
+    }
+
+    .subtitle {
+        font-size: 26px;
+    }
+
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+
+    .laptop-scene {
+        width: min(100%, 540px);
+        margin-top: 0;
+    }
+
+    .camera {
+        left: 3%;
+    }
+
+    .tablet {
+        left: 4%;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 560px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    .header {
+        min-height: 70px;
+        padding: 0 20px;
+    }
+
+    .brand-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+    }
+
+    .brand-info strong {
+        font-size: 10px;
+    }
+
+    .brand-info small {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+
+    .status {
+        font-size: 7px;
+        letter-spacing: .6px;
+        gap: 6px;
+    }
+
+    .main-content {
+        padding: 50px 18px 30px;
+        gap: 12px;
+    }
+
+    .eyebrow {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+        margin-bottom: 24px;
+    }
+
+    .error-number {
+        font-size: clamp(82px, 23vw, 120px);
+        letter-spacing: -7px;
+        margin-bottom: 24px;
+    }
+
+    .zero {
+        border-width: 6px;
+    }
+
+    .subtitle {
+        font-size: 23px;
+    }
+
+    .description {
+        max-width: 330px;
+        font-size: 11px;
+        margin-bottom: 24px;
+    }
+
+    .home-btn,
+    .back-btn {
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 9px;
+    }
+
+    .laptop-scene {
+        width: 112%;
+        max-width: 450px;
+        margin-left: -6%;
+    }
+
+    .main-laptop-wrap {
+        top: 23%;
+    }
+
+    .scene-label {
+        padding: 7px;
+        font-size: 6px;
+    }
+
+    .label-top {
+        top: 8%;
+        right: 1%;
+    }
+
+    .label-bottom {
+        bottom: 13%;
+    }
+
+    .camera {
+        width: 50px;
+        height: 36px;
+    }
+
+    .camera::after {
+        width: 17px;
+        height: 17px;
+        top: 9px;
+        left: 16px;
+    }
+
+    .cube {
+        width: 28px;
+        height: 28px;
+    }
+
+    .ring {
+        width: 39px;
+        height: 39px;
+        border-width: 5px;
+    }
+
+    .tablet {
+        width: 38px;
+        height: 52px;
+    }
+
+    .footer {
+        padding: 13px 18px;
+        gap: 10px;
+    }
+
+    .footer p,
+    .footer-index {
+        font-size: 7px;
+        letter-spacing: .7px;
+    }
+
+    .intro-laptop-scene {
+        height: 250px;
+        transform: scale(.78);
+    }
+
+    .intro-brand strong {
+        font-size: 12px;
+    }
+
+    .intro-caption {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+}
+
+@media (max-width: 360px) {
+
+    .status {
+        display: none;
+    }
+
+    .error-number {
+        font-size: 78px;
+    }
+
+    .subtitle {
+        font-size: 21px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================
+     OPENING LAPTOP INTRO
+========================================= -->
+
+<section class="intro-screen" id="introScreen" aria-label="Opening NOX Creative Studio">
+
+    <div class="intro-content">
+
+        <div class="intro-brand">
+            <strong>NO<span>X</span>.</strong>
+            <small>CREATIVE PORTFOLIO</small>
+        </div>
+
+
+        <div class="intro-laptop-scene">
+
+            <div class="intro-laptop-shadow"></div>
+
+            <div class="intro-laptop">
+
+                <div class="intro-laptop-screen">
+
+                    <div class="intro-screen-content">
+
+                        <strong>NO<span>X</span>.</strong>
+
+                        <small>DESIGN · MOTION · DIGITAL</small>
+
+                        <div class="intro-screen-glow"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="intro-laptop-base">
+
+                    <div class="intro-keyboard"></div>
+
+                    <div class="intro-trackpad"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p class="intro-caption">
+            ENTERING AN UNEXPECTED DIMENSION
+        </p>
+
+        <div class="intro-progress">
+            <span></span>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     404 MAIN PAGE
+========================================= -->
+
+<div class="error-page" id="errorPage">
+
+    <div class="grid-bg"></div>
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+
+    <!-- FLOATING 3D OBJECTS -->
+
+    <div class="floating camera"></div>
+
+    <div class="floating cube"></div>
+
+    <div class="floating ring"></div>
+
+    <div class="floating tablet"></div>
+
+    <div class="floating cross">✳</div>
+
+    <div class="floating particle particle-one"></div>
+
+    <div class="floating particle particle-two"></div>
+
+
+
+ 
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+
+        <!-- LEFT: 404 CONTENT -->
+
+        <section class="copy">
+
+            <div class="eyebrow">
+                LOST IN ANOTHER DIMENSION
+            </div>
+
+
+            <h1 class="error-number" aria-label="404">
+
+                <span class="four">4</span>
+
+
+                <!-- SECRET DOOR IN THE ZERO -->
+
+                <span class="zero" id="zeroDoor">
+
+                    <span class="door-light"></span>
+
+                    <span class="door"></span>
+
+                    <span class="person">
+
+                        <span class="person-hair"></span>
+
+                        <span class="person-head"></span>
+
+                        <span class="person-body"></span>
+
+                    </span>
+
+                </span>
+
+
+                <span class="four last">4</span>
+
+            </h1>
+
+
+            <h2 class="subtitle">
+                Well, this is <span>unexpected.</span>
+            </h2>
+
+
+            <p class="description">
+                Looks like this page took a creative detour.
+                Even the best ideas sometimes begin somewhere
+                unexpected. Let's find your way back.
+            </p>
+
+
+            <div class="actions">
+
+                <a href="index.html" class="home-btn">
+                    Back to home <span>↗</span>
+                </a>
+
+                <button type="button" class="back-btn" id="goBackButton">
+                    ← Go back
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RIGHT: LAPTOP SCENE -->
+
+        <section class="laptop-scene" aria-label="3D NOX laptop">
+
+            <div class="orbit"></div>
+
+
+            <div class="scene-label label-top">
+                <strong>404 / 001</strong> &nbsp; DIGITAL DETOUR
+            </div>
+
+
+            <div class="main-laptop-wrap">
+
+                <div class="main-laptop">
+
+
+                    <!-- SCREEN -->
+
+                    <div class="main-laptop-screen">
+
+                        <div class="main-screen-inner">
+
+                            <small>INDEPENDENT PORTFOLIO</small>
+
+                            <strong>NO<span>X</span>.</strong>
+
+                            <em></em>
+
+                            <p>DESIGN · MOTION · DIGITAL</p>
+
+                            <div class="screen-glint"></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- KEYBOARD BASE -->
+
+                    <div class="main-laptop-base">
+
+                        <div class="main-keyboard"></div>
+
+                        <div class="main-trackpad"></div>
+
+                        <div class="main-laptop-lip"></div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="laptop-ground-shadow"></div>
+
+
+            <div class="scene-label label-bottom">
+                <strong>NOX STUDIO</strong> &nbsp; KEEP EXPLORING ↗
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+
+</div>
+
+
+
+<script>
+/* =========================================
+   NOX CINEMATIC 404 EXPERIENCE
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const introScreen = document.getElementById("introScreen");
+    const errorPage = document.getElementById("errorPage");
+    const zeroDoor = document.getElementById("zeroDoor");
+    const goBackButton = document.getElementById("goBackButton");
+
+    /*
+       SEQUENCE:
+
+       1. Black screen + closed laptop.
+       2. Laptop opens.
+       3. Intro finishes.
+       4. 404 page appears.
+       5. Small door inside zero opens.
+       6. Tiny creative person comes out.
+    */
+
+    const INTRO_DURATION = 4300;
+
+    window.setTimeout(function () {
+
+        introScreen.classList.add("finished");
+
+        errorPage.classList.add("visible");
+
+        document.body.style.overflow = "";
+
+        window.setTimeout(function () {
+
+            errorPage.classList.add("door-open");
+
+        }, 1700);
+
+    }, INTRO_DURATION);
+
+
+    /*
+       GO BACK
+    */
+
+    goBackButton.addEventListener("click", function () {
+
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = "index.html";
+        }
+
+    });
+
+
+    /*
+       REPLAY THE SECRET DOOR ANIMATION
+    */
+
+    function replayDoor() {
+
+        errorPage.classList.remove("door-open");
+
+        window.setTimeout(function () {
+
+            errorPage.classList.add("door-open");
+
+        }, 250);
+
+    }
+
+    zeroDoor.style.cursor = "pointer";
+
+    zeroDoor.setAttribute("role", "button");
+    zeroDoor.setAttribute("tabindex", "0");
+    zeroDoor.setAttribute("aria-label", "Open the little door");
+
+    zeroDoor.addEventListener("click", replayDoor);
+
+    zeroDoor.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter" || event.key === " ") {
+
+            event.preventDefault();
+
+            replayDoor();
+
+        }
+
+    });
+
+
+    /*
+       ACCESSIBILITY:
+       Allow scrolling if the screen is small.
+    */
+
+    if (window.innerWidth <= 560) {
+        document.body.style.overflowY = "auto";
+    }
+
+});
+</script>
+
+</body>
+</html>

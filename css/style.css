@@ -6193,3 +6193,36 @@ z-index: 9999;
     visibility: visible !important;
     transform: scaleX(1) !important;
 }
+
+
+
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.brand img {
+    display: block;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+
+
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.footer-logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
