@@ -1,0 +1,2859 @@
+
+/* =========================================================
+   NOX CREATIVE STUDIO — ABOUT PAGE
+   Theme: Orange / White / Black
+   Premium editorial layout + 3D image composition
+========================================================= */
+
+.nox-about-page {
+    --about-orange: #ff6b2c;
+    --about-white: #ffffff;
+    --about-black: #090909;
+    --about-dark: #101010;
+    --about-grey: #a8a8a8;
+    --about-border: #303030;
+
+    background: var(--about-black);
+    color: var(--about-white);
+    font-family: "DM Sans", sans-serif;
+    overflow-x: clip;
+}
+
+.nox-about-page *,
+.nox-about-page *::before,
+.nox-about-page *::after {
+    box-sizing: border-box;
+}
+
+.nox-about-page img {
+    display: block;
+    max-width: 100%;
+}
+
+.nox-about-page a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nox-about-page button {
+    font: inherit;
+}
+
+.nox-about-page a:focus-visible,
+.nox-about-page button:focus-visible {
+    outline: 2px solid var(--about-orange);
+    outline-offset: 5px;
+}
+
+.nox-about-page .section-padding {
+    padding: 125px 7%;
+}
+
+.nox-about-page .about-eyebrow-line {
+    display: inline-block;
+    width: 35px;
+    height: 2px;
+    background: var(--about-orange);
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   HEADER COMPATIBILITY
+========================================================= */
+
+.nox-about-page .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: #090909;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.nox-about-page .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nox-about-page .nox-logo-symbol {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    background: var(--about-orange);
+    color: #090909;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.nox-about-page .nox-logo-symbol span,
+.nox-about-page .drawer-brand span,
+.nox-about-page .footer-logo span {
+    color: var(--about-orange);
+}
+
+.nox-about-page .nox-logo-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.nox-about-page .nox-logo-copy strong {
+    font-family: "Manrope", sans-serif;
+    font-size: 19px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .nox-logo-copy small {
+    color: #aaa;
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .desktop-navigation {
+    display: flex;
+    align-items: center;
+    gap: clamp(17px, 2.4vw, 36px);
+}
+
+.nox-about-page .desktop-navigation a {
+    position: relative;
+    color: #c8c8c8;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    transition: color .25s ease;
+}
+
+.nox-about-page .desktop-navigation a::after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--about-orange);
+    transition: width .3s ease;
+}
+
+.nox-about-page .desktop-navigation a:hover,
+.nox-about-page .desktop-navigation a.active {
+    color: #fff;
+}
+
+.nox-about-page .desktop-navigation a:hover::after,
+.nox-about-page .desktop-navigation a.active::after {
+    width: 100%;
+}
+
+.nox-about-page .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nox-about-page .login-trigger {
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.nox-about-page .header-project-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 13px 16px;
+    background: var(--about-orange);
+    color: #090909;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.nox-about-page .header-project-button span {
+    font-size: 17px;
+}
+
+.nox-about-page .menu-toggle {
+    display: none;
+}
+
+
+/* =========================================================
+   ABOUT HERO — CINEMATIC 3D STAGE
+========================================================= */
+
+.nox-about-page .about-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 850px;
+    min-height: max(850px, 100svh);
+    padding: 155px 7% 80px;
+    overflow: hidden;
+    background: #090909;
+}
+
+.nox-about-page .about-hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.nox-about-page .about-hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .27;
+    filter: grayscale(100%);
+    transform: scale(1.04);
+    animation: aboutBackgroundDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes aboutBackgroundDrift {
+    from {
+        transform: scale(1.04) translate3d(0,0,0);
+    }
+    to {
+        transform: scale(1.13) translate3d(-1%,1%,0);
+    }
+}
+
+.nox-about-page .about-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -4;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        #090909 0%,
+        rgba(9,9,9,.97) 33%,
+        rgba(9,9,9,.76) 65%,
+        rgba(9,9,9,.9) 100%
+    );
+}
+
+.nox-about-page .about-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 70px 70px;
+    mask-image: linear-gradient(90deg, transparent, #000 25%, #000 100%);
+}
+
+.nox-about-page .about-hero-top {
+    position: absolute;
+    top: 112px;
+    left: 7%;
+    right: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: #d0d0d0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.nox-about-page .about-hero-top > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nox-about-page .about-status-dot,
+.nox-about-page .about-note-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--about-orange);
+}
+
+.nox-about-page .about-status-dot {
+    animation: aboutStatusPulse 2s ease-in-out infinite;
+}
+
+@keyframes aboutStatusPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 3px rgba(255,107,44,.12);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255,107,44,.025);
+    }
+}
+
+
+/* HERO MAIN GRID */
+
+.nox-about-page .about-hero-layout {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(35px, 5.5vw, 95px);
+    max-width: 1550px;
+    margin: 0 auto;
+}
+
+
+/* HERO TEXT */
+
+.nox-about-page .about-hero-copy {
+    position: relative;
+    z-index: 4;
+    min-width: 0;
+}
+
+.nox-about-page .about-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 27px;
+    color: var(--about-orange);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+}
+
+.nox-about-page .about-eyebrow > span:first-child {
+    color: #fff;
+}
+
+.nox-about-page .about-hero-title {
+    max-width: 760px;
+    margin: 0;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(55px, 6.2vw, 100px);
+    font-weight: 800;
+    line-height: .98;
+    letter-spacing: -.065em;
+}
+
+.nox-about-page .about-title-orange {
+    display: inline-block;
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-title-period {
+    color: #fff;
+}
+
+.nox-about-page .about-hero-description {
+    max-width: 455px;
+    margin: 27px 0 0;
+    color: #c7c7c7;
+    font-size: 14px;
+    line-height: 1.95;
+}
+
+.nox-about-page .about-hero-description strong {
+    display: block;
+    margin-top: 9px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.nox-about-page .about-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 34px;
+}
+
+.nox-about-page .about-orange-button {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    min-height: 54px;
+    padding: 0 18px;
+    border: 1px solid var(--about-orange);
+    background: var(--about-orange);
+    color: #090909;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background .3s ease, color .3s ease, transform .3s ease;
+}
+
+.nox-about-page .about-orange-button:hover {
+    background: transparent;
+    color: var(--about-orange);
+    transform: translateY(-4px);
+}
+
+.nox-about-page .about-orange-button span {
+    font-size: 20px;
+    transition: transform .3s ease;
+}
+
+.nox-about-page .about-orange-button:hover span {
+    transform: translate(3px,-3px);
+}
+
+.nox-about-page .about-text-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .25s ease;
+}
+
+.nox-about-page .about-text-button span {
+    color: var(--about-orange);
+    font-size: 18px;
+}
+
+.nox-about-page .about-text-button:hover {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-hero-bottom-copy {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 54px;
+    color: #d0d0d0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.nox-about-page .about-hero-bottom-copy i {
+    width: 4px;
+    height: 4px;
+    background: var(--about-orange);
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   3D IMAGE COMPOSITION
+========================================================= */
+
+.nox-about-page .about-visual-stage {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    height: clamp(450px, 44vw, 620px);
+    perspective: 1300px;
+    transform-style: preserve-3d;
+}
+
+.nox-about-page .about-visual-index {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #c7c7c7;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.nox-about-page .about-visual-index span:first-child {
+    color: var(--about-orange);
+}
+
+
+/* Shared image card */
+
+.nox-about-page .about-photo {
+    position: absolute;
+    margin: 0;
+    overflow: hidden;
+    background: #171717;
+    border: 1px solid #464646;
+    transform-style: preserve-3d;
+    transition:
+        transform .8s cubic-bezier(.2,.75,.2,1),
+        border-color .4s ease,
+        box-shadow .5s ease;
+}
+
+.nox-about-page .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(.2,.75,.2,1);
+}
+
+.nox-about-page .about-photo:hover img {
+    transform: scale(1.07);
+}
+
+.nox-about-page .about-photo figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 13px;
+    background: #090909;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.nox-about-page .about-photo figcaption span:first-child {
+    color: var(--about-orange);
+}
+
+
+/* Rear card */
+
+.nox-about-page .about-photo-back {
+    z-index: 1;
+    top: 14%;
+    left: 8%;
+    width: 55%;
+    height: 56%;
+    opacity: .8;
+    transform: translateZ(-110px) rotateY(17deg) rotateZ(-9deg);
+}
+
+.nox-about-page .about-photo-back img {
+    filter: grayscale(100%) brightness(.7);
+}
+
+
+/* Middle card */
+
+.nox-about-page .about-photo-middle {
+    z-index: 2;
+    top: 25%;
+    right: 0;
+    width: 57%;
+    height: 55%;
+    transform: translateZ(-40px) rotateY(-14deg) rotateZ(8deg);
+}
+
+.nox-about-page .about-photo-middle img {
+    filter: saturate(.75) brightness(.85);
+}
+
+
+/* Front main image */
+
+.nox-about-page .about-photo-front {
+    z-index: 4;
+    top: 16%;
+    left: 19%;
+    width: 60%;
+    height: 68%;
+    border: 1px solid #555;
+    box-shadow: 20px 25px 65px rgba(0,0,0,.48);
+    transform: translateZ(80px) rotateY(-4deg) rotateZ(-2deg);
+}
+
+.nox-about-page .about-photo-front:hover {
+    border-color: var(--about-orange);
+}
+
+.nox-about-page .about-photo-front img {
+    filter: saturate(.8);
+}
+
+.nox-about-page .about-photo-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 25px;
+    background: linear-gradient(
+        180deg,
+        transparent 35%,
+        rgba(0,0,0,.28) 55%,
+        rgba(0,0,0,.92) 100%
+    );
+}
+
+.nox-about-page .about-photo-overlay > span {
+    color: var(--about-orange);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .about-photo-overlay strong {
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(19px, 2.2vw, 31px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1px;
+}
+
+
+/* Floating badge */
+
+.nox-about-page .about-orbit-badge {
+    position: absolute;
+    z-index: 8;
+    top: 6%;
+    right: 3%;
+    display: grid;
+    place-items: center;
+    width: 115px;
+    height: 115px;
+    border: 1px solid #424242;
+    border-radius: 50%;
+    background: #101010;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    animation: aboutBadgeFloat 5s ease-in-out infinite;
+}
+
+.nox-about-page .about-badge-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    animation: aboutBadgeRotate 22s linear infinite;
+}
+
+.nox-about-page .about-badge-svg text {
+    fill: #fff;
+    font-size: 8.8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .about-badge-center {
+    color: #fff;
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.nox-about-page .about-badge-center span {
+    color: var(--about-orange);
+}
+
+@keyframes aboutBadgeRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes aboutBadgeFloat {
+    0%,100% {
+        transform: translateY(0) rotate(0);
+    }
+    50% {
+        transform: translateY(-13px) rotate(5deg);
+    }
+}
+
+
+/* Floating image note */
+
+.nox-about-page .about-floating-note {
+    position: absolute;
+    z-index: 9;
+    left: 0;
+    bottom: 12%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 1px solid #3b3b3b;
+    background: #0b0b0b;
+    box-shadow: 10px 12px 35px rgba(0,0,0,.4);
+    animation: aboutNoteFloat 6s ease-in-out infinite;
+}
+
+.nox-about-page .about-note-dot {
+    width: 8px;
+    height: 8px;
+}
+
+.nox-about-page .about-floating-note div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nox-about-page .about-floating-note strong {
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.nox-about-page .about-floating-note small {
+    color: #929292;
+    font-size: 8px;
+    letter-spacing: .7px;
+}
+
+@keyframes aboutNoteFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+.nox-about-page .about-visual-side-label {
+    position: absolute;
+    right: -16px;
+    bottom: 8%;
+    color: #aaa;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    writing-mode: vertical-rl;
+}
+
+
+/* =========================================================
+   FLOATING GEOMETRIC 3D OBJECTS
+========================================================= */
+
+.nox-about-page .about-3d-scene {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    perspective: 1000px;
+}
+
+.nox-about-page .about-3d-ring,
+.nox-about-page .about-3d-cube,
+.nox-about-page .about-3d-orb,
+.nox-about-page .about-3d-cross {
+    position: absolute;
+    display: block;
+}
+
+.nox-about-page .about-3d-ring {
+    width: 115px;
+    height: 115px;
+    border: 1px solid rgba(255,107,44,.75);
+    border-radius: 50%;
+    transform: rotateX(65deg) rotateY(25deg);
+    animation: aboutRingFloat 10s ease-in-out infinite;
+}
+
+.nox-about-page .ring-a {
+    top: 18%;
+    left: 47%;
+}
+
+.nox-about-page .ring-b {
+    right: 7%;
+    bottom: 13%;
+    width: 75px;
+    height: 75px;
+    animation-delay: -4s;
+}
+
+@keyframes aboutRingFloat {
+    0%,100% {
+        transform: translateY(0) rotateX(65deg) rotateY(25deg) rotateZ(0);
+    }
+    50% {
+        transform: translateY(-25px) rotateX(80deg) rotateY(65deg) rotateZ(70deg);
+    }
+}
+
+.nox-about-page .about-3d-cube {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--about-orange);
+    transform: rotate(35deg) rotateX(55deg);
+    animation: aboutCubeFloat 8s ease-in-out infinite;
+}
+
+.nox-about-page .cube-a {
+    top: 23%;
+    left: 5%;
+}
+
+.nox-about-page .cube-b {
+    right: 8%;
+    top: 54%;
+    width: 43px;
+    height: 43px;
+    animation-delay: -3s;
+}
+
+@keyframes aboutCubeFloat {
+    0%,100% {
+        transform: translateY(0) rotate(35deg) rotateX(55deg) rotateY(0);
+    }
+    50% {
+        transform: translateY(-28px) rotate(110deg) rotateX(95deg) rotateY(75deg);
+    }
+}
+
+.nox-about-page .about-3d-orb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--about-orange);
+    box-shadow: 0 0 0 7px rgba(255,107,44,.08);
+    animation: aboutOrbFloat 7s ease-in-out infinite;
+}
+
+.nox-about-page .orb-a {
+    left: 44%;
+    bottom: 17%;
+}
+
+.nox-about-page .orb-b {
+    right: 12%;
+    top: 25%;
+    width: 8px;
+    height: 8px;
+    animation-delay: -3s;
+}
+
+@keyframes aboutOrbFloat {
+    0%,100% {
+        transform: translate3d(0,0,0);
+    }
+    50% {
+        transform: translate3d(0,-25px,25px);
+    }
+}
+
+.nox-about-page .about-3d-cross {
+    color: var(--about-orange);
+    font-size: 31px;
+    font-weight: 300;
+    animation: aboutCrossFloat 6s ease-in-out infinite;
+}
+
+.nox-about-page .cross-a {
+    left: 47%;
+    top: 39%;
+}
+
+.nox-about-page .cross-b {
+    right: 6%;
+    bottom: 23%;
+    animation-delay: -2s;
+}
+
+@keyframes aboutCrossFloat {
+    0%,100% {
+        transform: translateY(0) rotate(0);
+    }
+    50% {
+        transform: translateY(-20px) rotate(90deg);
+    }
+}
+
+
+/* =========================================================
+   HERO BOTTOM STRIP
+========================================================= */
+
+.nox-about-page .about-hero-footer {
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 18px;
+    padding-top: 17px;
+    border-top: 1px solid #363636;
+    color: #d1d1d1;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.nox-about-page .about-footer-center {
+    text-align: center;
+}
+
+.nox-about-page .about-hero-footer a {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nox-about-page .about-hero-footer a span {
+    color: var(--about-orange);
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.nox-about-page .about-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 75px;
+    padding-bottom: 19px;
+    border-bottom: 1px solid #303030;
+}
+
+.nox-about-page .about-section-index {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: var(--about-orange);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .about-section-index > span:first-child {
+    color: #fff;
+}
+
+.nox-about-page .about-section-side-note {
+    color: #909090;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-align: right;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.nox-about-page .about-intro {
+    position: relative;
+    background: #0d0d0d;
+}
+
+.nox-about-page .about-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(45px, 9vw, 150px);
+}
+
+.nox-about-page .about-small-label {
+    margin: 0 0 25px;
+    color: var(--about-orange);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .about-intro-heading h2 {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    color: #fff;
+    font-size: clamp(52px, 6vw, 86px);
+    font-weight: 800;
+    line-height: .98;
+    letter-spacing: -.065em;
+}
+
+.nox-about-page .about-intro-heading h2 span {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-intro-content {
+    align-self: center;
+    max-width: 580px;
+}
+
+.nox-about-page .about-intro-content p {
+    margin: 0 0 21px;
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.95;
+}
+
+.nox-about-page .about-intro-content .about-intro-lead {
+    margin-bottom: 27px;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(23px, 2.4vw, 34px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -.8px;
+}
+
+.nox-about-page .about-inline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 17px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid var(--about-orange);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-decoration: none;
+}
+
+.nox-about-page .about-inline-link span {
+    color: var(--about-orange);
+    font-size: 18px;
+    transition: transform .3s ease;
+}
+
+.nox-about-page .about-inline-link:hover span {
+    transform: translate(4px,-4px);
+}
+
+
+/* =========================================================
+   NUMBERS SECTION
+========================================================= */
+
+.nox-about-page .about-numbers {
+    padding: 40px 7% 85px;
+    background: #ff6b2c;
+    color: #090909;
+}
+
+.nox-about-page .about-numbers-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(0,0,0,.35);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+}
+
+.nox-about-page .about-numbers-heading span:last-child {
+    text-align: right;
+}
+
+.nox-about-page .about-numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+}
+
+.nox-about-page .about-number-item {
+    padding: 35px 25px 0;
+    border-right: 1px solid rgba(0,0,0,.28);
+}
+
+.nox-about-page .about-number-item:first-child {
+    padding-left: 0;
+}
+
+.nox-about-page .about-number-item:last-child {
+    border-right: 0;
+}
+
+.nox-about-page .about-number-index {
+    color: rgba(0,0,0,.75);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+}
+
+.nox-about-page .about-number {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    margin: 23px 0 13px;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(45px, 5.5vw, 80px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -4px;
+}
+
+.nox-about-page .about-number i {
+    font-size: 30px;
+    font-style: normal;
+}
+
+.nox-about-page .about-number-item p {
+    margin: 0;
+    color: #24150f;
+    font-size: 11px;
+    line-height: 1.7;
+    font-weight: 700;
+}
+
+.nox-about-page .infinity-number {
+    font-size: clamp(70px, 6vw, 90px);
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.nox-about-page .about-philosophy {
+    background: #090909;
+}
+
+.nox-about-page .about-philosophy-layout {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: clamp(45px, 8vw, 130px);
+}
+
+.nox-about-page .about-philosophy-title h2 {
+    margin: 0;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(48px, 5.7vw, 82px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.065em;
+}
+
+.nox-about-page .about-philosophy-title h2 span {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-philosophy-title p {
+    max-width: 300px;
+    margin-top: 25px;
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.nox-about-page .about-orange-dot {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-philosophy-list {
+    border-top: 1px solid #343434;
+}
+
+.nox-about-page .about-belief-card {
+    display: grid;
+    grid-template-columns: 35px minmax(0,1fr) 25px;
+    align-items: start;
+    gap: 17px;
+    padding: 25px 0;
+    border-bottom: 1px solid #343434;
+    transition: padding .3s ease;
+}
+
+.nox-about-page .about-belief-card:hover {
+    padding-left: 10px;
+}
+
+.nox-about-page .about-belief-number {
+    padding-top: 5px;
+    color: var(--about-orange);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.nox-about-page .about-belief-card h3 {
+    margin: 0;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(17px, 1.7vw, 23px);
+    font-weight: 700;
+    letter-spacing: -.6px;
+}
+
+.nox-about-page .about-belief-card p {
+    max-width: 500px;
+    margin: 12px 0 0;
+    color: #9c9c9c;
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+.nox-about-page .about-belief-symbol {
+    color: #858585;
+    font-size: 18px;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.nox-about-page .about-belief-card:hover .about-belief-symbol {
+    color: var(--about-orange);
+    transform: translate(3px,-3px);
+}
+
+
+/* =========================================================
+   PROCESS SECTION
+========================================================= */
+
+.nox-about-page .about-process {
+    padding: 115px 7%;
+    background: #f2f0eb;
+    color: #101010;
+}
+
+.nox-about-page .about-process .about-section-index {
+    color: #bd4819;
+}
+
+.nox-about-page .about-process .about-section-index > span:first-child {
+    color: #111;
+}
+
+.nox-about-page .about-process .about-eyebrow-line {
+    background: #bd4819;
+}
+
+.nox-about-page .about-process-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 55px;
+}
+
+.nox-about-page .about-process-top h2 {
+    margin: 25px 0 0;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(44px, 5.5vw, 78px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.065em;
+}
+
+.nox-about-page .about-process-top h2 span {
+    color: #d95320;
+}
+
+.nox-about-page .about-process-top > p {
+    max-width: 360px;
+    margin: 0 0 5px;
+    color: #595959;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.nox-about-page .about-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    border-top: 1px solid #c8c5bf;
+    border-bottom: 1px solid #c8c5bf;
+}
+
+.nox-about-page .about-process-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
+    padding: 25px 24px 27px;
+    border-right: 1px solid #c8c5bf;
+    transition: background .3s ease, color .3s ease;
+}
+
+.nox-about-page .about-process-card:first-child {
+    padding-left: 0;
+}
+
+.nox-about-page .about-process-card:last-child {
+    border-right: 0;
+}
+
+.nox-about-page .about-process-card:hover {
+    background: #ff6b2c;
+}
+
+.nox-about-page .about-process-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: #595959;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.nox-about-page .about-process-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin: 43px 0 25px;
+    border: 1px solid #c8c5bf;
+    font-size: 20px;
+    transition: border-color .3s ease, transform .3s ease;
+}
+
+.nox-about-page .about-process-card:hover .about-process-icon {
+    border-color: #111;
+    transform: rotate(-8deg);
+}
+
+.nox-about-page .about-process-card h3 {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(22px, 2vw, 29px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.nox-about-page .about-process-card p {
+    margin: 16px 0 35px;
+    color: #626262;
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.nox-about-page .about-process-card:hover p,
+.nox-about-page .about-process-card:hover .about-process-topline {
+    color: #27170f;
+}
+
+.nox-about-page .about-process-arrow {
+    margin-top: auto;
+    align-self: flex-end;
+    font-size: 23px;
+    transition: transform .3s ease;
+}
+
+.nox-about-page .about-process-card:hover .about-process-arrow {
+    transform: translate(4px,-4px);
+}
+
+
+/* =========================================================
+   TEAM SECTION
+========================================================= */
+
+.nox-about-page .about-team {
+    background: #0d0d0d;
+}
+
+.nox-about-page .about-team-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 35px;
+    margin-bottom: 60px;
+}
+
+.nox-about-page .about-team-heading h2 {
+    margin: 0;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(48px, 6vw, 85px);
+    font-weight: 900;
+    line-height: .98;
+    letter-spacing: -.07em;
+}
+
+.nox-about-page .about-team-heading h2 span {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-team-heading p {
+    max-width: 330px;
+    margin: 0 0 5px;
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.nox-about-page .about-team-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    align-items: start;
+    gap: 25px;
+}
+
+.nox-about-page .about-team-card {
+    min-width: 0;
+}
+
+.nox-about-page .about-team-card.team-card-offset {
+    margin-top: 55px;
+}
+
+.nox-about-page .about-team-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: #1b1b1b;
+}
+
+.nox-about-page .about-team-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid rgba(255,255,255,.12);
+    transition: border-color .3s ease;
+}
+
+.nox-about-page .about-team-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform .8s cubic-bezier(.2,.75,.2,1), filter .5s ease;
+}
+
+.nox-about-page .about-team-card:hover .about-team-image img {
+    transform: scale(1.06);
+    filter: grayscale(0%);
+}
+
+.nox-about-page .about-team-card:hover .about-team-image::after {
+    border-color: var(--about-orange);
+}
+
+.nox-about-page .about-team-index {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+    padding: 9px 11px;
+    background: #090909;
+    color: var(--about-orange);
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.nox-about-page .about-team-link {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    background: var(--about-orange);
+    color: #090909;
+    text-decoration: none;
+    font-size: 21px;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+.nox-about-page .about-team-card:hover .about-team-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nox-about-page .about-team-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 20px;
+}
+
+.nox-about-page .about-team-info h3 {
+    margin: 0;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(15px, 1.5vw, 20px);
+    font-weight: 800;
+}
+
+.nox-about-page .about-team-info p {
+    margin: 9px 0 0;
+    color: var(--about-orange);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.nox-about-page .about-team-info > span {
+    padding-top: 4px;
+    color: #777;
+    font-size: 8px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATEMENT SECTION
+========================================================= */
+
+.nox-about-page .about-statement {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 120px 7%;
+    background: #ff6b2c;
+    color: #090909;
+}
+
+.nox-about-page .about-statement-background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.nox-about-page .about-statement-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .13;
+    filter: grayscale(100%);
+}
+
+.nox-about-page .about-statement::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(255,107,44,.88);
+}
+
+.nox-about-page .about-statement-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.nox-about-page .about-statement-label {
+    display: inline-block;
+    margin-bottom: 38px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .about-statement h2 {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(55px, 8.8vw, 125px);
+    font-weight: 900;
+    line-height: .91;
+    letter-spacing: -.075em;
+}
+
+.nox-about-page .about-statement h2 span {
+    color: #fff;
+}
+
+.nox-about-page .about-statement-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 55px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0,0,0,.35);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.nox-about-page .about-statement-mark {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.nox-about-page .about-statement-mark span {
+    color: #fff;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.nox-about-page .about-cta {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 45px;
+    min-height: 490px;
+    padding: 100px 7%;
+    overflow: hidden;
+    background: #101010;
+}
+
+.nox-about-page .about-cta-index {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    color: #b1b1b1;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.nox-about-page .about-cta-index span:first-child {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.nox-about-page .about-cta-content > p {
+    margin: 0 0 25px;
+    color: var(--about-orange);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .about-cta-content h2 {
+    margin: 0;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(48px, 6.5vw, 91px);
+    font-weight: 900;
+    line-height: .98;
+    letter-spacing: -.07em;
+}
+
+.nox-about-page .about-cta-content h2 span {
+    color: var(--about-orange);
+}
+
+.nox-about-page .about-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 57px;
+    margin-top: 37px;
+    padding: 0 19px;
+    background: #fff;
+    color: #090909;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background .3s ease, transform .3s ease;
+}
+
+.nox-about-page .about-cta-button:hover {
+    background: var(--about-orange);
+    transform: translateY(-4px);
+}
+
+.nox-about-page .about-cta-arrow {
+    font-size: 20px;
+}
+
+.nox-about-page .about-cta-decoration {
+    position: absolute;
+    right: -30px;
+    bottom: -120px;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    color: #1a1a1a;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(250px, 37vw, 520px);
+    font-weight: 900;
+    line-height: .8;
+    letter-spacing: -.13em;
+    pointer-events: none;
+}
+
+.nox-about-page .about-cta-decoration span:last-child {
+    color: #252525;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.nox-about-page .site-footer {
+    padding: 70px 7% 25px;
+    background: #070707;
+    border-top: 1px solid #292929;
+}
+
+.nox-about-page .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 45px;
+    padding-bottom: 65px;
+}
+
+.nox-about-page .footer-logo {
+    display: inline-block;
+    color: #fff;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.nox-about-page .footer-brand > p {
+    margin: 22px 0;
+    color: #b4b4b4;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.nox-about-page .footer-location {
+    color: var(--about-orange);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.nox-about-page .footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.nox-about-page .footer-heading {
+    margin-bottom: 9px;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.nox-about-page .footer-column a,
+.nox-about-page .footer-column button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #9b9b9b;
+    font-size: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color .25s ease;
+}
+
+.nox-about-page .footer-column a:hover,
+.nox-about-page .footer-column button:hover {
+    color: var(--about-orange);
+}
+
+.nox-about-page .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 22px;
+    border-top: 1px solid #292929;
+    color: #8c8c8c;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+}
+
+.nox-about-page .footer-bottom a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nox-about-page .footer-bottom a:hover {
+    color: var(--about-orange);
+}
+
+
+/* =========================================================
+   LOGIN MODAL
+========================================================= */
+
+.nox-about-page .login-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 25px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+
+.nox-about-page .login-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.nox-about-page .login-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+}
+
+.nox-about-page .login-modal-panel {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    width: min(900px,100%);
+    max-height: min(700px,90svh);
+    overflow: auto;
+    background: #101010;
+    border: 1px solid #3a3a3a;
+    transform: translateY(20px) scale(.98);
+    transition: transform .35s ease;
+}
+
+.nox-about-page .login-modal.is-open .login-modal-panel {
+    transform: translateY(0) scale(1);
+}
+
+.nox-about-page .login-modal-close {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #555;
+    background: #090909;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.nox-about-page .login-modal-visual {
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+    background: #171717;
+}
+
+.nox-about-page .login-modal-visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%);
+}
+
+.nox-about-page .login-modal-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,rgba(0,0,0,.9),transparent 75%);
+}
+
+.nox-about-page .login-modal-visual-copy {
+    position: absolute;
+    right: 25px;
+    bottom: 30px;
+    left: 25px;
+    z-index: 2;
+}
+
+.nox-about-page .login-modal-visual-copy > span {
+    color: var(--about-orange);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .login-modal-visual-copy h2 {
+    margin: 18px 0 0;
+    color: #fff;
+    font-family: "Manrope",sans-serif;
+    font-size: 38px;
+    line-height: 1.05;
+}
+
+.nox-about-page .login-modal-form-area {
+    align-self: center;
+    padding: 45px;
+}
+
+.nox-about-page .about-login-kicker {
+    color: var(--about-orange);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.nox-about-page .login-modal-form-area > h2 {
+    margin: 14px 0;
+    color: #fff;
+    font-family: "Manrope",sans-serif;
+    font-size: 32px;
+    letter-spacing: -1px;
+}
+
+.nox-about-page .login-modal-form-area > p {
+    color: #aaa;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.nox-about-page .login-modal-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin: 27px 0;
+    padding: 5px;
+    background: #080808;
+}
+
+.nox-about-page .login-tab {
+    min-height: 38px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #aaa;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.nox-about-page .login-tab.active {
+    background: var(--about-orange);
+    color: #090909;
+    font-weight: 800;
+}
+
+.nox-about-page #aboutLoginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nox-about-page #aboutLoginForm label {
+    margin-top: 7px;
+    color: #e5e5e5;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.nox-about-page #aboutLoginForm input {
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    padding: 0 13px;
+    border: 1px solid #3c3c3c;
+    border-radius: 0;
+    outline: none;
+    background: #090909;
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+}
+
+.nox-about-page #aboutLoginForm input:focus {
+    border-color: var(--about-orange);
+}
+
+.nox-about-page .about-password-wrap {
+    position: relative;
+}
+
+.nox-about-page .about-password-wrap input {
+    padding-right: 48px !important;
+}
+
+.nox-about-page #aboutPasswordToggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 46px;
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.nox-about-page .about-login-submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 48px;
+    margin-top: 14px;
+    padding: 0 15px;
+    border: 1px solid var(--about-orange);
+    background: var(--about-orange);
+    color: #090909;
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.nox-about-page .about-login-submit span {
+    font-size: 18px;
+}
+
+.nox-about-page .about-login-notice {
+    min-height: 15px;
+    color: var(--about-orange) !important;
+    font-size: 11px !important;
+}
+
+.nox-about-page .about-login-help {
+    color: #aaa;
+    font-size: 10px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.nox-about-page .about-login-help:hover {
+    color: var(--about-orange);
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.nox-about-page [data-about-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity .75s ease,
+        transform .75s cubic-bezier(.2,.7,.2,1);
+}
+
+.nox-about-page [data-about-reveal].about-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nox-about-page .about-belief-card[data-about-reveal],
+.nox-about-page .about-process-card[data-about-reveal],
+.nox-about-page .about-number-item[data-about-reveal],
+.nox-about-page .about-team-card[data-about-reveal] {
+    transition-delay: var(--about-reveal-delay, 0ms);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .nox-about-page .site-header {
+        padding: 0;
+    }
+
+    .nox-about-page .about-hero {
+        padding-right: 5%;
+        padding-left: 5%;
+        min-height: 820px;
+    }
+
+    .nox-about-page .about-hero-top {
+        left: 5%;
+        right: 5%;
+    }
+
+    .nox-about-page .about-hero-layout {
+        grid-template-columns: .95fr 1.05fr;
+        gap: 28px;
+    }
+
+    .nox-about-page .about-hero-title {
+        font-size: clamp(49px,6vw,76px);
+        letter-spacing: -.055em;
+    }
+
+    .nox-about-page .about-visual-stage {
+        height: 480px;
+    }
+
+    .nox-about-page .about-photo-front {
+        left: 15%;
+        width: 68%;
+    }
+
+    .nox-about-page .about-photo-back {
+        left: 3%;
+    }
+
+    .nox-about-page .about-orbit-badge {
+        width: 90px;
+        height: 90px;
+    }
+
+    .nox-about-page .about-badge-center {
+        font-size: 27px;
+    }
+
+    .nox-about-page .section-padding,
+    .nox-about-page .about-process,
+    .nox-about-page .about-statement,
+    .nox-about-page .about-cta {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .nox-about-page .about-numbers {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .nox-about-page .about-intro-grid,
+    .nox-about-page .about-philosophy-layout {
+        gap: 45px;
+    }
+
+    .nox-about-page .about-process-card {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .nox-about-page .about-process-card:first-child {
+        padding-left: 0;
+    }
+
+    .nox-about-page .site-footer {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE NAV
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .nox-about-page .desktop-navigation,
+    .nox-about-page .header-actions {
+        display: none;
+    }
+
+    .nox-about-page .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        width: 45px;
+        height: 45px;
+        padding: 10px;
+        border: 1px solid #414141;
+        background: #101010;
+        cursor: pointer;
+    }
+
+    .nox-about-page .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        transition: transform .3s ease;
+    }
+
+    .nox-about-page .menu-toggle[aria-expanded="true"] span:first-child {
+        transform: translateY(4px) rotate(45deg);
+    }
+
+    .nox-about-page .menu-toggle[aria-expanded="true"] span:last-child {
+        transform: translateY(-4px) rotate(-45deg);
+    }
+
+    .nox-about-page .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 199;
+        visibility: hidden;
+        opacity: 0;
+        background: rgba(0,0,0,.8);
+        transition: opacity .3s ease, visibility .3s ease;
+    }
+
+    .nox-about-page .mobile-overlay.is-open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .nox-about-page .mobile-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        width: min(360px,90vw);
+        max-width: 100%;
+        padding: 25px;
+        overflow-y: auto;
+        background: #0b0b0b;
+        border-left: 1px solid #333;
+        transform: translateX(105%);
+        transition: transform .35s cubic-bezier(.2,.75,.2,1);
+    }
+
+    .nox-about-page .mobile-drawer.is-open {
+        transform: translateX(0);
+    }
+
+    .nox-about-page .drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 22px;
+        border-bottom: 1px solid #303030;
+    }
+
+    .nox-about-page .drawer-brand {
+        color: #fff;
+        font-size: 30px;
+        font-weight: 900;
+        text-decoration: none;
+    }
+
+    .nox-about-page #drawerClose {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #444;
+        background: #141414;
+        color: #fff;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    .nox-about-page .drawer-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 25px 0;
+        color: var(--about-orange);
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 1.3px;
+    }
+
+    .nox-about-page .drawer-navigation {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nox-about-page .drawer-navigation a {
+        display: grid;
+        grid-template-columns: 28px 1fr 20px;
+        align-items: center;
+        gap: 10px;
+        padding: 19px 0;
+        border-bottom: 1px solid #303030;
+        color: #fff;
+        font-family: "Manrope",sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .nox-about-page .drawer-navigation a > span:first-child {
+        color: var(--about-orange);
+        font-size: 9px;
+    }
+
+    .nox-about-page .drawer-navigation a > span:last-child {
+        color: #777;
+        font-size: 15px;
+    }
+
+    .nox-about-page .drawer-navigation a[aria-current="page"] {
+        color: var(--about-orange);
+    }
+
+    .nox-about-page .drawer-bottom {
+        margin-top: auto;
+        padding-top: 40px;
+    }
+
+    .nox-about-page .drawer-bottom p {
+        color: #c4c4c4;
+        font-family: "Manrope",sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1.3;
+    }
+
+    .nox-about-page .drawer-project-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 22px;
+        padding: 17px;
+        background: var(--about-orange);
+        color: #090909;
+        font-size: 11px;
+        font-weight: 900;
+        text-decoration: none;
+    }
+
+    .nox-about-page .drawer-project-button span {
+        font-size: 20px;
+    }
+
+    body.about-drawer-open {
+        overflow: hidden;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE CONTENT
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .nox-about-page .section-padding {
+        padding: 85px 22px;
+    }
+
+    .nox-about-page .about-hero {
+        min-height: 0;
+        padding: 120px 22px 70px;
+    }
+
+    .nox-about-page .about-hero-top {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        margin-bottom: 43px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .nox-about-page .about-hero-top > span {
+        display: none;
+    }
+
+    .nox-about-page .about-hero-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .nox-about-page .about-hero-title {
+        font-size: clamp(52px,11vw,82px);
+        line-height: .99;
+        letter-spacing: -.06em;
+    }
+
+    .nox-about-page .about-hero-description {
+        max-width: 520px;
+        font-size: 13px;
+    }
+
+    .nox-about-page .about-hero-bottom-copy {
+        margin-top: 30px;
+    }
+
+    .nox-about-page .about-visual-stage {
+        width: 100%;
+        height: clamp(370px,105vw,500px);
+        margin-top: 5px;
+    }
+
+    .nox-about-page .about-photo-back {
+        top: 15%;
+        left: 4%;
+        width: 55%;
+        height: 57%;
+    }
+
+    .nox-about-page .about-photo-middle {
+        top: 25%;
+        right: 1%;
+        width: 56%;
+        height: 54%;
+    }
+
+    .nox-about-page .about-photo-front {
+        top: 16%;
+        left: 16%;
+        width: 66%;
+        height: 66%;
+    }
+
+    .nox-about-page .about-photo-overlay {
+        padding: 16px;
+    }
+
+    .nox-about-page .about-photo-overlay strong {
+        font-size: clamp(18px,5vw,27px);
+    }
+
+    .nox-about-page .about-photo figcaption {
+        padding: 10px;
+        font-size: 7px;
+    }
+
+    .nox-about-page .about-orbit-badge {
+        top: 3%;
+        right: 1%;
+        width: 82px;
+        height: 82px;
+    }
+
+    .nox-about-page .about-badge-center {
+        font-size: 24px;
+    }
+
+    .nox-about-page .about-floating-note {
+        left: 0;
+        bottom: 8%;
+        padding: 12px;
+    }
+
+    .nox-about-page .about-floating-note strong {
+        font-size: 8px;
+    }
+
+    .nox-about-page .about-floating-note small {
+        font-size: 7px;
+    }
+
+    .nox-about-page .about-visual-side-label {
+        right: -7px;
+        font-size: 7px;
+    }
+
+    .nox-about-page .about-hero-footer {
+        position: relative;
+        inset: auto;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 40px;
+        padding-top: 20px;
+        font-size: 7px;
+    }
+
+    .nox-about-page .about-footer-center {
+        text-align: right;
+    }
+
+    .nox-about-page .about-hero-footer a {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+
+    .nox-about-page .about-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 42px;
+    }
+
+    .nox-about-page .about-section-side-note {
+        text-align: left;
+    }
+
+    .nox-about-page .about-intro-grid,
+    .nox-about-page .about-philosophy-layout {
+        grid-template-columns: 1fr;
+        gap: 38px;
+    }
+
+    .nox-about-page .about-intro-heading h2 {
+        font-size: clamp(54px,11vw,80px);
+    }
+
+    .nox-about-page .about-intro-content .about-intro-lead {
+        font-size: 25px;
+    }
+
+    .nox-about-page .about-numbers {
+        padding: 35px 22px 60px;
+    }
+
+    .nox-about-page .about-numbers-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nox-about-page .about-numbers-heading span:last-child {
+        text-align: left;
+        line-height: 1.7;
+    }
+
+    .nox-about-page .about-numbers-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .nox-about-page .about-number-item {
+        min-width: 0;
+        padding: 27px 15px 25px;
+        border-right: 1px solid rgba(0,0,0,.28);
+        border-bottom: 1px solid rgba(0,0,0,.28);
+    }
+
+    .nox-about-page .about-number-item:nth-child(odd) {
+        padding-left: 0;
+    }
+
+    .nox-about-page .about-number-item:nth-child(even) {
+        border-right: 0;
+    }
+
+    .nox-about-page .about-number-item:nth-last-child(-n+2) {
+        border-bottom: 0;
+    }
+
+    .nox-about-page .about-number {
+        font-size: clamp(48px,12vw,75px);
+        letter-spacing: -3px;
+    }
+
+    .nox-about-page .about-number-item p {
+        font-size: 10px;
+    }
+
+    .nox-about-page .about-philosophy-title h2 {
+        font-size: clamp(51px,11vw,78px);
+    }
+
+    .nox-about-page .about-belief-card {
+        grid-template-columns: 25px minmax(0,1fr) 20px;
+        gap: 12px;
+        padding: 22px 0;
+    }
+
+    .nox-about-page .about-process {
+        padding: 85px 22px;
+    }
+
+    .nox-about-page .about-process-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .nox-about-page .about-process-top h2 {
+        font-size: clamp(44px,10vw,70px);
+    }
+
+    .nox-about-page .about-process-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .nox-about-page .about-process-card {
+        min-height: 320px;
+        padding: 22px 15px;
+        border-bottom: 1px solid #c8c5bf;
+    }
+
+    .nox-about-page .about-process-card:first-child {
+        padding-left: 15px;
+    }
+
+    .nox-about-page .about-process-card:nth-child(odd) {
+        border-right: 1px solid #c8c5bf;
+    }
+
+    .nox-about-page .about-process-card:nth-child(even) {
+        border-right: 0;
+    }
+
+    .nox-about-page .about-process-card:nth-last-child(-n+2) {
+        border-bottom: 0;
+    }
+
+    .nox-about-page .about-process-icon {
+        margin-top: 35px;
+    }
+
+    .nox-about-page .about-process-card h3 {
+        font-size: 23px;
+    }
+
+    .nox-about-page .about-team-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nox-about-page .about-team-heading h2 {
+        font-size: clamp(53px,11vw,80px);
+    }
+
+    .nox-about-page .about-team-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 25px 14px;
+    }
+
+    .nox-about-page .about-team-card.team-card-offset {
+        margin-top: 30px;
+    }
+
+    .nox-about-page .about-team-card:last-child {
+        grid-column: 1 / -1;
+        width: calc(50% - 7px);
+    }
+
+    .nox-about-page .about-team-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nox-about-page .about-team-info h3 {
+        font-size: 15px;
+    }
+
+    .nox-about-page .about-team-link {
+        width: 36px;
+        height: 36px;
+        opacity: 1;
+        transform: none;
+    }
+
+    .nox-about-page .about-statement {
+        padding: 85px 22px;
+    }
+
+    .nox-about-page .about-statement h2 {
+        font-size: clamp(52px,11vw,86px);
+    }
+
+    .nox-about-page .about-statement-bottom {
+        margin-top: 40px;
+        font-size: 8px;
+    }
+
+    .nox-about-page .about-cta {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        min-height: 0;
+        padding: 85px 22px;
+    }
+
+    .nox-about-page .about-cta-content h2 {
+        font-size: clamp(48px,10vw,78px);
+    }
+
+    .nox-about-page .about-cta-decoration {
+        right: -40px;
+        bottom: -35px;
+        font-size: 300px;
+    }
+
+    .nox-about-page .site-footer {
+        padding: 55px 22px 22px;
+    }
+
+    .nox-about-page .footer-top {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 42px 25px;
+        padding-bottom: 45px;
+    }
+
+    .nox-about-page .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .nox-about-page .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL PHONES
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .nox-about-page .about-hero {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .nox-about-page .about-hero-title {
+        font-size: 49px;
+        letter-spacing: -.055em;
+    }
+
+    .nox-about-page .about-hero-actions {
+        gap: 18px;
+    }
+
+    .nox-about-page .about-orange-button {
+        min-height: 49px;
+        gap: 18px;
+        padding: 0 13px;
+        font-size: 10px;
+    }
+
+    .nox-about-page .about-visual-stage {
+        height: 360px;
+    }
+
+    .nox-about-page .about-photo-overlay {
+        padding: 12px;
+    }
+
+    .nox-about-page .about-photo-overlay > span {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .nox-about-page .about-photo-overlay strong {
+        font-size: 17px;
+    }
+
+    .nox-about-page .about-orbit-badge {
+        width: 70px;
+        height: 70px;
+    }
+
+    .nox-about-page .about-badge-svg text {
+        font-size: 9px;
+    }
+
+    .nox-about-page .about-badge-center {
+        font-size: 20px;
+    }
+
+    .nox-about-page .about-floating-note {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .nox-about-page .about-floating-note small {
+        letter-spacing: 0;
+    }
+
+    .nox-about-page .about-visual-side-label {
+        right: -5px;
+        font-size: 6px;
+    }
+
+    .nox-about-page .about-number-index {
+        font-size: 7px;
+        letter-spacing: .5px;
+    }
+
+    .nox-about-page .about-process-card {
+        min-height: 340px;
+        padding-right: 11px;
+        padding-left: 11px;
+    }
+
+    .nox-about-page .about-process-card:first-child {
+        padding-left: 11px;
+    }
+
+    .nox-about-page .about-process-card h3 {
+        font-size: 21px;
+    }
+
+    .nox-about-page .about-process-card p {
+        font-size: 10px;
+    }
+
+    .nox-about-page .about-team-grid {
+        gap: 25px 12px;
+    }
+
+    .nox-about-page .about-team-card:last-child {
+        width: calc(50% - 6px);
+    }
+
+    .nox-about-page .about-team-info h3 {
+        font-size: 13px;
+    }
+
+    .nox-about-page .about-team-info p {
+        font-size: 7px;
+        letter-spacing: .7px;
+    }
+
+    .nox-about-page .about-statement h2 {
+        font-size: 49px;
+    }
+
+    .nox-about-page .about-cta-content h2 {
+        font-size: 46px;
+    }
+
+    .nox-about-page .about-cta-button {
+        width: 100%;
+        gap: 15px;
+        padding: 0 13px;
+        font-size: 10px;
+    }
+
+    .nox-about-page .footer-top {
+        gap: 35px 18px;
+    }
+
+    .nox-about-page .footer-column a,
+    .nox-about-page .footer-column button {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nox-about-page *,
+    .nox-about-page *::before,
+    .nox-about-page *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+
+    .nox-about-page [data-about-reveal] {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+
+
