@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             closeDrawer();
 
-            closeLoginModal();
+            /* Login modal ESC is handled by main.js */
 
         }
 
@@ -596,141 +596,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================
        8. LOGIN MODAL
+       Fully handled by main.js which loads
+       first. No duplicate listeners needed.
     ===================================== */
 
-    const loginModal = document.getElementById("loginModal");
-
-    const loginTriggers = document.querySelectorAll(".login-trigger");
-
-    const loginCloseButtons =
-        document.querySelectorAll("[data-login-close]");
-
-    const loginForm = document.getElementById("loginForm");
-
-    const loginMessage = document.getElementById("loginMessage");
-
-    let previousFocusedElement = null;
-
-
-    function openLoginModal() {
-
-        if (!loginModal) return;
-
-        previousFocusedElement = document.activeElement;
-
-        loginModal.classList.add("active");
-
-        loginModal.setAttribute("aria-hidden", "false");
-
-        document.body.classList.add("modal-open");
-
-        const emailInput = document.getElementById("loginEmail");
-
-        if (emailInput) {
-
-            window.setTimeout(() => {
-                emailInput.focus();
-            }, 150);
-
-        }
-
-    }
-
-
-    function closeLoginModal() {
-
-        if (!loginModal) return;
-
-        loginModal.classList.remove("active");
-
-        loginModal.setAttribute("aria-hidden", "true");
-
-        document.body.classList.remove("modal-open");
-
-        if (
-            previousFocusedElement &&
-            typeof previousFocusedElement.focus === "function"
-        ) {
-
-            previousFocusedElement.focus();
-
-        }
-
-    }
-
-
-    loginTriggers.forEach((button) => {
-
-        button.addEventListener("click", openLoginModal);
-
-    });
-
-
-    loginCloseButtons.forEach((button) => {
-
-        button.addEventListener("click", closeLoginModal);
-
-    });
-
-
-    /*
-      Password visibility toggle.
-    */
-
-    const togglePassword =
-        document.getElementById("togglePassword");
-
-    const loginPassword =
-        document.getElementById("loginPassword");
-
-
-    if (togglePassword && loginPassword) {
-
-        togglePassword.addEventListener("click", () => {
-
-            const shouldShow =
-                loginPassword.type === "password";
-
-            loginPassword.type =
-                shouldShow ? "text" : "password";
-
-            togglePassword.innerHTML = shouldShow
-                ? '<i class="fa-regular fa-eye-slash"></i>'
-                : '<i class="fa-regular fa-eye"></i>';
-
-            togglePassword.setAttribute(
-                "aria-label",
-                shouldShow ? "Hide password" : "Show password"
-            );
-
-        });
-
-    }
-
-
-    /*
-      Demo-only form.
-
-      No backend or authentication is connected.
-      Never send actual credentials to a fake endpoint.
-    */
-
-    if (loginForm) {
-
-        loginForm.addEventListener("submit", (event) => {
-
-            event.preventDefault();
-
-            if (loginMessage) {
-
-                loginMessage.textContent =
-                    "Demo only: authentication is not connected to a server.";
-
-            }
-
-        });
-
-    }
+    /* main.js attaches all .login-trigger click handlers,
+       the modal close button, overlay-click close,
+       ESC key close, and form submit handlers.          */
 
 
     /* =====================================

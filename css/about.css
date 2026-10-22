@@ -1798,26 +1798,15 @@
 
 /* =========================================================
    LOGIN MODAL
+   The outer overlay is #loginModal.modal-overlay,
+   activated by main.js adding .active class.
+   style.css handles overlay base visibility/opacity.
+   about.css only styles the inner panel and form.
 ========================================================= */
 
-.nox-about-page .login-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: grid;
-    place-items: center;
-    padding: 25px;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .3s ease, visibility .3s ease;
-}
-
-.nox-about-page .login-modal.is-open {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-}
+/* Remove about-page override of .login-modal as overlay.
+   style.css .modal-overlay.active already shows the modal.
+   Only the inner panel animation needs overriding here. */
 
 .nox-about-page .login-modal-overlay {
     position: absolute;
@@ -1839,7 +1828,8 @@
     transition: transform .35s ease;
 }
 
-.nox-about-page .login-modal.is-open .login-modal-panel {
+.nox-about-page .modal-overlay.active .login-modal-panel,
+.nox-about-page .modal-overlay.show .login-modal-panel {
     transform: translateY(0) scale(1);
 }
 

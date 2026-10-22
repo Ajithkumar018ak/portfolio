@@ -401,161 +401,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        6. LOGIN MODAL
+       Fully handled by main.js which loads first.
+       main.js binds all .login-trigger buttons, the
+       modal close button, overlay-click close, ESC close,
+       password toggles, and form submit handlers.
     ===================================================== */
 
-    const loginModal = document.getElementById("loginModal");
-    const loginTriggers = page.querySelectorAll("[data-login-trigger]");
-    const loginCloseButtons = page.querySelectorAll("[data-login-close]");
-
-    let modalOpen = false;
-    let modalPreviousFocus = null;
-
-    function openLoginModal() {
-
-        if (!loginModal || modalOpen) return;
-
-        closeDrawer();
-
-        modalOpen = true;
-        modalPreviousFocus = document.activeElement;
-
-        loginModal.classList.add("is-open");
-        loginModal.setAttribute("aria-hidden", "false");
-
-        document.body.style.overflow = "hidden";
-
-        const firstInput = loginModal.querySelector(
-            'input:not([type="hidden"])'
-        );
-
-        if (firstInput) {
-            window.setTimeout(() => firstInput.focus(), 100);
-        }
-    }
-
-    function closeLoginModal() {
-
-        if (!loginModal || !modalOpen) return;
-
-        modalOpen = false;
-
-        loginModal.classList.remove("is-open");
-        loginModal.setAttribute("aria-hidden", "true");
-
-        document.body.style.overflow = "";
-
-        if (
-            modalPreviousFocus &&
-            typeof modalPreviousFocus.focus === "function"
-        ) {
-            modalPreviousFocus.focus();
-        }
-    }
-
-    loginTriggers.forEach(button => {
-        button.addEventListener("click", openLoginModal);
-    });
-
-    loginCloseButtons.forEach(button => {
-        button.addEventListener("click", closeLoginModal);
-    });
-
-
-    /* =====================================================
-       7. CLIENT / STUDIO TAB
-    ===================================================== */
-
-    const loginTabs = page.querySelectorAll("[data-login-tab]");
-    const loginNotice = document.getElementById("aboutLoginNotice");
-
-    let selectedLoginType = "client";
-
-    loginTabs.forEach(tab => {
-
-        tab.addEventListener("click", () => {
-
-            selectedLoginType = tab.dataset.loginTab || "client";
-
-            loginTabs.forEach(item => {
-                const active = item === tab;
-
-                item.classList.toggle("active", active);
-                item.setAttribute("aria-pressed", String(active));
-            });
-
-            if (loginNotice) {
-                loginNotice.textContent = "";
-            }
-
-        });
-
-    });
-
-
-    /* =====================================================
-       8. PASSWORD SHOW / HIDE
-    ===================================================== */
-
-    const passwordInput = document.getElementById("aboutLoginPassword");
-    const passwordToggle = document.getElementById("aboutPasswordToggle");
-
-    if (passwordInput && passwordToggle) {
-
-        passwordToggle.addEventListener("click", () => {
-
-            const showPassword = passwordInput.type === "password";
-
-            passwordInput.type = showPassword ? "text" : "password";
-
-            passwordToggle.setAttribute(
-                "aria-label",
-                showPassword ? "Hide password" : "Show password"
-            );
-
-            const icon = passwordToggle.querySelector("i");
-
-            if (icon) {
-
-                icon.classList.toggle("fa-eye", !showPassword);
-                icon.classList.toggle("fa-eye-slash", showPassword);
-
-            }
-
-        });
-
-    }
-
-
-    /* =====================================================
-       9. STATIC LOGIN DEMO
-       No backend / no credential storage
-    ===================================================== */
-
-    const loginForm = document.getElementById("aboutLoginForm");
-
-    if (loginForm) {
-
-        loginForm.addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            if (!loginForm.reportValidity()) return;
-
-            /*
-             * Static demo only.
-             * No credentials are sent or saved.
-             */
-
-            if (loginNotice) {
-
-                loginNotice.textContent =
-                    `${selectedLoginType === "client" ? "Client" : "Studio"} login is a demo. Connect authentication to enable sign-in.`;
-
-            }
-
-        });
-
-    }
+    /* No duplicate listeners needed here. */
 
 
     /* =====================================================
@@ -566,10 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (event.key !== "Escape") return;
 
-        if (modalOpen) {
-            closeLoginModal();
-            return;
-        }
+        /* Login modal ESC is handled by main.js */
 
         if (drawerOpen) {
             closeDrawer();

@@ -2266,28 +2266,15 @@ input:focus-visible {
 
 /* =========================================
    LOGIN MODAL
+   The outer overlay is #loginModal.modal-overlay,
+   toggled with .active by main.js.
+   style.css handles base overlay visibility.
+   Work page overrides inner dialog visuals.
 ========================================= */
 
-.login-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-
-    display: grid;
-    place-items: center;
-
-    padding: 20px;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: opacity .3s ease, visibility .3s ease;
-}
-
-.login-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
+/* Remove work-page override of .login-modal as overlay:
+   style.css already defines .login-modal as inner dialog.
+   Only override what's needed for visual customisation. */
 
 .login-backdrop {
     position: absolute;
@@ -2317,8 +2304,27 @@ input:focus-visible {
     transition: transform .35s ease;
 }
 
-.login-modal.active .login-dialog {
+.modal-overlay.active .login-dialog,
+.modal-overlay.show .login-dialog {
     transform: translateY(0) scale(1);
+}
+
+.login-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 3;
+
+    display: grid;
+    place-items: center;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--line);
+    background: rgba(0,0,0,.3);
+
+    cursor: pointer;
 }
 
 .login-close {
