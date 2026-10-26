@@ -1450,3 +1450,282 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   NOX CREATIVE STUDIO
+   SERVICES CAROUSEL
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const carousel = document.getElementById("servicesCarousel");
+    const progress = document.getElementById("servicesProgress");
+    const currentNumber = document.getElementById("servicesCurrent");
+
+    if (!carousel) return;
+
+    const cards = Array.from(
+        carousel.querySelectorAll(".service-card")
+    );
+
+    if (!cards.length) return;
+
+    let animationFrame = null;
+
+    /* =========================================
+       UPDATE CAROUSEL PROGRESS
+    ========================================= */
+
+    function updateCarousel() {
+
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        const scrollPercentage = maxScroll > 0
+            ? (carousel.scrollLeft / maxScroll) * 100
+            : 0;
+
+        if (progress) {
+            progress.style.width = `${scrollPercentage}%`;
+        }
+
+        /* Find the currently visible card */
+
+        const carouselRect = carousel.getBoundingClientRect();
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        cards.forEach((card, index) => {
+
+            const cardRect = card.getBoundingClientRect();
+
+            const distance = Math.abs(
+                cardRect.left - carouselRect.left
+            );
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+
+        });
+
+        if (currentNumber) {
+            currentNumber.textContent = String(
+                closestIndex + 1
+            ).padStart(2, "0");
+        }
+
+    }
+
+
+    /* =========================================
+       SCROLL EVENT
+    ========================================= */
+
+    carousel.addEventListener("scroll", () => {
+
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+        }
+
+        animationFrame = requestAnimationFrame(() => {
+            updateCarousel();
+        });
+
+    }, { passive: true });
+
+
+    /* =========================================
+       MOUSE WHEEL → HORIZONTAL SCROLL
+    ========================================= */
+
+    carousel.addEventListener("wheel", (event) => {
+
+        if (window.innerWidth <= 768) return;
+
+        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+
+            const maxScroll =
+                carousel.scrollWidth - carousel.clientWidth;
+
+            const canScrollRight =
+                carousel.scrollLeft < maxScroll;
+
+            const canScrollLeft =
+                carousel.scrollLeft > 0;
+
+            if (
+                (event.deltaY > 0 && canScrollRight) ||
+                (event.deltaY < 0 && canScrollLeft)
+            ) {
+                event.preventDefault();
+
+                carousel.scrollBy({
+                    left: event.deltaY,
+                    behavior: "auto"
+                });
+            }
+
+        }
+
+    }, { passive: false });
+
+
+    /* =========================================
+       KEYBOARD NAVIGATION
+    ========================================= */
+
+    carousel.addEventListener("keydown", (event) => {
+
+        if (event.key === "ArrowRight") {
+
+            event.preventDefault();
+
+            scrollToCard(getCurrentIndex() + 1);
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            event.preventDefault();
+
+            scrollToCard(getCurrentIndex() - 1);
+
+        }
+
+        if (event.key === "Home") {
+
+            event.preventDefault();
+
+            scrollToCard(0);
+
+        }
+
+        if (event.key === "End") {
+
+            event.preventDefault();
+
+            scrollToCard(cards.length - 1);
+
+        }
+
+    });
+
+
+    /* =========================================
+       GET CURRENT CARD INDEX
+    ========================================= */
+
+    function getCurrentIndex() {
+
+        if (!cards.length) return 0;
+
+        const carouselLeft =
+            carousel.getBoundingClientRect().left;
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        cards.forEach((card, index) => {
+
+            const distance = Math.abs(
+                card.getBoundingClientRect().left - carouselLeft
+            );
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+
+        });
+
+        return closestIndex;
+
+    }
+
+
+    /* =========================================
+       SCROLL TO SPECIFIC CARD
+    ========================================= */
+
+    function scrollToCard(index) {
+
+        const targetIndex = Math.max(
+            0,
+            Math.min(index, cards.length - 1)
+        );
+
+        cards[targetIndex].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start"
+        });
+
+    }
+
+
+    /* =========================================
+       INITIALIZE
+    ========================================= */
+
+    updateCarousel();
+
+    window.addEventListener("resize", updateCarousel);
+
+});
+
+
+
+
+
+
+
+
+/* ==========================================
+   NOX — CONTINUOUS 3D IMAGE ROTATION
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const stage = document.querySelector(".about-visual-stage");
+
+    if (!stage) return;
+
+    const back = stage.querySelector(".about-photo-back");
+    const middle = stage.querySelector(".about-photo-middle");
+    const front = stage.querySelector(".about-photo-front");
+
+    const images = [back, middle, front];
+
+    images.forEach((image, index) => {
+
+        if (!image) return;
+
+        image.style.transformStyle = "preserve-3d";
+
+        image.classList.add("rotate-3d");
+
+        image.style.setProperty(
+            "--rotate-duration",
+            `${12 + index * 4}s`
+        );
+
+        image.style.setProperty(
+            "--rotate-direction",
+            index === 1 ? "reverse" : "normal"
+        );
+
+    });
+
+});

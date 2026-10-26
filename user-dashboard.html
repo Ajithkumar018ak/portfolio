@@ -1,0 +1,2055 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>User Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+:root{
+    --black:#080808;
+    --white:#fff;
+    --background:#f5f5f5;
+    --surface:#fff;
+    --text:#171717;
+    --muted:#858585;
+    --line:#e9e9e9;
+    --soft:#f5f5f5;
+    --sidebar-width:260px;
+    --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    background:var(--background);
+    color:var(--text);
+    font-family:"DM Sans",sans-serif;
+    min-height:100vh;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{
+    outline:2px solid #111;outline-offset:3px;
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar{
+    position:fixed;
+    inset:0 auto 0 0;
+    width:var(--sidebar-width);
+    padding:25px 17px 17px;
+    display:flex;
+    flex-direction:column;
+    background:var(--black);
+    color:var(--white);
+    z-index:100;
+    overflow-y:auto;
+    transition:transform .3s ease;
+}
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:0 9px 25px;
+    border-bottom:1px solid #292929;
+}
+.brand-mark{
+    width:42px;
+    height:42px;
+    border-radius:11px;
+    display:grid;
+    place-items:center;
+    background:#fff;
+    color:#080808;
+    font:800 21px Manrope,sans-serif;
+    letter-spacing:-2px;
+}
+.brand-name{
+    display:block;
+    font:800 15px Manrope,sans-serif;
+    letter-spacing:1.5px;
+}
+.brand-sub{
+    display:block;
+    font-size:9px;
+    color:#999;
+    letter-spacing:2px;
+    margin-top:4px;
+}
+.workspace{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:100%;
+    margin:20px 0 25px;
+    padding:12px;
+    border:1px solid #2b2b2b;
+    background:#111;
+    color:#fff;
+    text-align:left;
+    border-radius:11px;
+}
+.workspace-icon{
+    width:35px;
+    height:35px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    background:#292929;
+}
+.workspace-text{flex:1;min-width:0}
+.workspace-text strong{display:block;font-size:11px}
+.workspace-text small{display:block;font-size:10px;color:#929292;margin-top:4px}
+.sidebar-label{
+    color:#777;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:2px;
+    padding:0 12px 12px;
+}
+.nav-list{display:grid;gap:5px}
+.nav-link{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:13px 12px;
+    color:#a7a7a7;
+    border:1px solid transparent;
+    border-radius:10px;
+    background:transparent;
+    text-align:left;
+    font-size:12px;
+    font-weight:600;
+    transition:background .2s,color .2s;
+}
+.nav-link i{width:18px;text-align:center;font-size:14px}
+.nav-link:hover{background:#181818;color:#fff}
+.nav-link.active{background:#fff;color:#090909}
+.nav-count{
+    margin-left:auto;
+    min-width:22px;
+    height:22px;
+    display:grid;
+    place-items:center;
+    padding:0 5px;
+    border-radius:6px;
+    background:#292929;
+    color:#fff;
+    font-size:9px;
+}
+.nav-link.active .nav-count{background:#e9e9e9;color:#111}
+
+.sidebar-bottom{margin-top:auto;padding-top:25px}
+.sidebar-promo{
+    padding:16px;
+    margin-bottom:15px;
+    border:1px solid #292929;
+    border-radius:12px;
+    background:#111;
+}
+.sidebar-promo-icon{
+    width:35px;height:35px;
+    display:grid;place-items:center;
+    background:#242424;border-radius:9px;
+    margin-bottom:14px;
+}
+.sidebar-promo h3{font-size:12px;margin-bottom:7px}
+.sidebar-promo p{font-size:10px;color:#999;line-height:1.8}
+.sidebar-promo .promo-button{
+    width:100%;
+    margin-top:14px;
+    padding:11px;
+    border:0;
+    border-radius:7px;
+    background:#fff;
+    color:#111;
+    font-size:10px;
+    font-weight:800;
+}
+.logout-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    color:#aaa;
+    font-size:12px;
+    font-weight:600;
+    border-radius:9px;
+    transition:.2s;
+}
+.logout-link i{width:18px;text-align:center}
+.logout-link:hover{background:#251515;color:#fff}
+.sidebar-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:12px;
+    padding:17px 5px 0;
+    border-top:1px solid #292929;
+}
+.avatar{
+    width:37px;height:37px;
+    flex-shrink:0;
+    display:grid;place-items:center;
+    border-radius:50%;
+    background:#e8e8e8;color:#111;
+    font-size:11px;font-weight:800;
+}
+.sidebar-user-info{flex:1;min-width:0}
+.sidebar-user-info strong{display:block;font-size:11px}
+.sidebar-user-info small{display:block;margin-top:4px;color:#888;font-size:10px}
+.sidebar-user button{
+    border:0;background:transparent;color:#aaa;padding:6px;
+}
+
+/* =========================
+   MAIN AND HEADER
+========================= */
+.main{margin-left:var(--sidebar-width);min-height:100vh}
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    height:75px;
+    padding:0 34px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+}
+.mobile-menu{
+    display:none;
+    width:39px;height:39px;
+    place-items:center;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#fff;
+}
+.breadcrumb{font-size:11px;color:#999}
+.breadcrumb strong{color:#111}
+.topbar-right{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.search-box{
+    width:225px;
+    height:39px;
+    padding:0 12px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:#fafafa;
+    border:1px solid var(--line);
+    border-radius:9px;
+}
+.search-box i{font-size:12px;color:#999}
+.search-box input{
+    width:100%;
+    min-width:0;
+    border:0;outline:0;background:transparent;
+    font-size:11px;
+}
+.icon-button{
+    width:39px;height:39px;
+    display:grid;place-items:center;
+    position:relative;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+}
+.notification-dot{
+    position:absolute;right:8px;top:7px;
+    width:7px;height:7px;border-radius:50%;
+    background:#111;border:1px solid #fff;
+}
+.top-avatar{
+    width:36px;height:36px;
+    display:grid;place-items:center;
+    border-radius:50%;background:#111;color:#fff;
+    font-size:10px;font-weight:800;
+}
+
+/* =========================
+   PAGE LAYOUT
+========================= */
+.content{
+    max-width:1700px;
+    margin:0 auto;
+    padding:31px 34px 40px;
+}
+.page-section{display:none;animation:appear .28s ease}
+.page-section.active{display:block}
+@keyframes appear{
+    from{opacity:0;transform:translateY(7px)}
+    to{opacity:1;transform:translateY(0)}
+}
+.page-heading{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+.eyebrow{
+    margin-bottom:10px;
+    color:#777;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+.page-heading h1{
+    font:800 clamp(26px,3vw,35px) Manrope,sans-serif;
+    letter-spacing:-1.5px;
+    line-height:1.2;
+}
+.page-heading p{
+    margin-top:10px;
+    color:#858585;
+    font-size:12px;
+    line-height:1.8;
+}
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:12px 16px;
+    border:1px solid transparent;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:700;
+    transition:transform .2s,background .2s;
+    white-space:nowrap;
+}
+.button:hover{transform:translateY(-2px)}
+.button-dark{background:#090909;color:#fff}
+.button-dark:hover{background:#303030}
+.button-light{background:#fff;color:#111;border-color:#e6e6e6}
+.button-light:hover{background:#f5f5f5}
+.button-small{padding:9px 12px;font-size:10px}
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin:29px 0 16px;
+}
+.section-heading h2{font:800 16px Manrope,sans-serif}
+.section-heading p{font-size:10px;color:#888;margin-top:5px}
+.text-link{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;font-weight:700;
+}
+
+/* =========================
+   WELCOME BANNER
+========================= */
+.welcome-banner{
+    position:relative;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.4fr .6fr;
+    gap:20px;
+    padding:31px;
+    background:#090909;
+    color:#fff;
+    border-radius:var(--radius);
+}
+.welcome-banner:after{
+    content:"P.";
+    position:absolute;
+    right:9%;top:50%;
+    transform:translateY(-50%);
+    font:800 200px Manrope,sans-serif;
+    color:#171717;
+    pointer-events:none;
+}
+.welcome-copy{position:relative;z-index:1}
+.welcome-tag{
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:18px;
+    color:#c4c4c4;font-size:9px;letter-spacing:1.6px;
+}
+.welcome-tag span{
+    width:6px;height:6px;border-radius:50%;background:#fff;
+}
+.welcome-banner h2{
+    max-width:490px;
+    font:800 clamp(26px,3vw,38px) Manrope,sans-serif;
+    letter-spacing:-1.6px;line-height:1.2;
+}
+.welcome-banner p{
+    max-width:470px;
+    margin-top:14px;
+    color:#b0b0b0;font-size:12px;line-height:1.9;
+}
+.welcome-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.welcome-side{
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
+    align-items:flex-end;justify-content:flex-end;
+    text-align:right;gap:11px;
+}
+.welcome-side small{font-size:9px;letter-spacing:2px;color:#888}
+.welcome-side strong{font:800 33px Manrope,sans-serif}
+.welcome-side span{font-size:10px;color:#aaa}
+
+/* =========================
+   STATS
+========================= */
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+    margin-top:20px;
+}
+.stat-card{
+    min-width:0;
+    padding:20px;
+    border:1px solid var(--line);
+    border-radius:13px;
+    background:#fff;
+    box-shadow:0 7px 25px #00000004;
+}
+.stat-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stat-label{font-size:11px;color:#777;font-weight:600}
+.stat-icon{
+    width:34px;height:34px;
+    display:grid;place-items:center;
+    border-radius:9px;background:#f0f0f0;font-size:13px;
+}
+.stat-value{margin-top:17px;font:800 27px Manrope,sans-serif;letter-spacing:-1px}
+.stat-foot{margin-top:8px;color:#888;font-size:10px;line-height:1.6}
+.stat-foot strong{color:#111}
+
+/* =========================
+   CARDS AND DASHBOARD GRID
+========================= */
+.card{
+    min-width:0;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 7px 25px #00000004;
+}
+.card-header{
+    padding:19px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;border-bottom:1px solid #eee;
+}
+.card-header h3{font:800 13px Manrope,sans-serif}
+.card-header p{font-size:10px;color:#888;margin-top:5px}
+.card-body{padding:18px 20px}
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr);
+    gap:17px;
+}
+.project-list{display:grid}
+.project-row{
+    display:grid;
+    grid-template-columns:47px minmax(0,1fr) auto;
+    align-items:center;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid #eee;
+}
+.project-row:last-child{border-bottom:0}
+.project-thumb{
+    width:47px;height:47px;overflow:hidden;
+    background:#eee;border-radius:9px;
+}
+.project-thumb img{width:100%;height:100%;object-fit:cover}
+.project-info{min-width:0}
+.project-info strong{
+    display:block;font-size:11px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.project-info span{display:block;margin-top:5px;color:#888;font-size:10px}
+.status{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:7px 9px;background:#f0f0f0;
+    border-radius:6px;font-size:9px;font-weight:700;
+    white-space:nowrap;
+}
+.status:before{
+    content:"";width:5px;height:5px;border-radius:50%;background:#111;
+}
+.status.review:before{background:#555}
+.status.pending:before{background:#999}
+.progress-item{margin-bottom:19px}
+.progress-label{
+    display:flex;justify-content:space-between;gap:10px;
+    margin-bottom:9px;font-size:10px;
+}
+.progress-label span{color:#888}
+.progress-track{height:5px;background:#eee;border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;background:#111;border-radius:99px}
+.activity-list{display:grid}
+.activity-item{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:14px 0;border-bottom:1px solid #eee;
+}
+.activity-item:last-child{border-bottom:0}
+.activity-icon{
+    width:33px;height:33px;flex-shrink:0;
+    display:grid;place-items:center;
+    border-radius:9px;background:#f1f1f1;font-size:12px;
+}
+.activity-text{font-size:10px;line-height:1.7;color:#777}
+.activity-text strong{color:#222}
+.activity-text time{display:block;margin-top:4px;color:#aaa;font-size:9px}
+
+/* QUICK ACTIONS */
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+}
+.quick-action{
+    width:100%;
+    padding:17px 14px;
+    text-align:left;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fff;
+    transition:transform .2s,border-color .2s;
+}
+.quick-action:hover{transform:translateY(-3px);border-color:#aaa}
+.quick-action i{
+    width:35px;height:35px;
+    display:grid;place-items:center;
+    margin-bottom:14px;
+    background:#f1f1f1;border-radius:9px;font-size:13px;
+}
+.quick-action strong{display:block;font-size:11px}
+.quick-action span{display:block;margin-top:6px;color:#888;font-size:10px;line-height:1.6}
+
+/* =========================
+   PORTFOLIO
+========================= */
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-btn{
+    padding:10px 14px;
+    border:1px solid #e6e6e6;border-radius:8px;
+    background:#fff;color:#777;
+    font-size:10px;font-weight:700;
+}
+.filter-btn.active,.filter-btn:hover{background:#111;color:#fff;border-color:#111}
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:17px;
+}
+.portfolio-card{
+    min-width:0;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:#fff;
+    transition:transform .25s,box-shadow .25s;
+}
+.portfolio-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px #0000000b}
+.portfolio-image{height:205px;position:relative;overflow:hidden;background:#e7e7e7}
+.portfolio-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.portfolio-card:hover .portfolio-image img{transform:scale(1.04)}
+.portfolio-number{
+    position:absolute;top:12px;left:12px;
+    padding:7px 9px;background:#fff;color:#111;
+    border-radius:5px;font-size:9px;font-weight:800;
+}
+.portfolio-content{padding:17px}
+.portfolio-meta{font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase}
+.portfolio-content h3{margin-top:8px;font:800 15px Manrope,sans-serif}
+.portfolio-content p{margin-top:9px;color:#777;font-size:10px;line-height:1.8}
+.portfolio-bottom{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;margin-top:17px;
+}
+.round-action{
+    width:33px;height:33px;
+    display:grid;place-items:center;
+    border:1px solid #e8e8e8;background:#fff;border-radius:50%;
+}
+
+/* =========================
+   PROJECT TABLE
+========================= */
+.table-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.table-search{
+    display:flex;align-items:center;gap:9px;
+    flex:1;min-width:180px;height:40px;
+    padding:0 12px;background:#fff;
+    border:1px solid var(--line);border-radius:9px;
+}
+.table-search i{font-size:11px;color:#999}
+.table-search input{width:100%;border:0;outline:0;font-size:11px}
+.select-control{
+    height:40px;padding:0 12px;
+    border:1px solid var(--line);border-radius:9px;
+    background:#fff;font-size:10px;color:#555;
+}
+.table-wrap{overflow-x:auto}
+table{width:100%;min-width:690px;border-collapse:collapse}
+thead{background:#fafafa}
+th{
+    padding:14px 16px;text-align:left;
+    color:#888;font-size:9px;letter-spacing:1px;
+    text-transform:uppercase;
+}
+td{padding:15px 16px;border-top:1px solid #eee;font-size:11px;white-space:nowrap}
+.table-project{display:flex;align-items:center;gap:10px}
+.table-project img{width:38px;height:38px;object-fit:cover;border-radius:8px;background:#eee}
+.table-project strong{display:block;font-size:11px}
+.table-project small{display:block;color:#999;font-size:9px;margin-top:4px}
+.table-action{
+    width:32px;height:32px;
+    border:1px solid #e8e8e8;background:#fff;border-radius:8px;
+}
+
+/* =========================
+   SERVICES
+========================= */
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px;
+}
+.service-card{
+    min-width:0;padding:24px;
+    border:1px solid var(--line);
+    border-radius:14px;background:#fff;
+    transition:transform .2s,border-color .2s;
+}
+.service-card:hover{transform:translateY(-3px);border-color:#aaa}
+.service-icon{
+    width:45px;height:45px;
+    display:grid;place-items:center;
+    margin-bottom:19px;
+    background:#111;color:#fff;
+    border-radius:11px;font-size:15px;
+}
+.service-number{color:#999;font-size:9px;letter-spacing:1.5px}
+.service-card h3{margin-top:11px;font:800 16px Manrope,sans-serif;line-height:1.5}
+.service-card p{margin-top:10px;color:#777;font-size:11px;line-height:1.9}
+.service-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:17px}
+.service-tags span{padding:7px 9px;border-radius:6px;background:#f2f2f2;font-size:9px}
+.service-footer{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;margin-top:22px;padding-top:15px;border-top:1px solid #eee;
+}
+.service-footer span{color:#888;font-size:10px}
+.service-footer button{padding:5px 0;border:0;background:transparent;font-size:10px;font-weight:800}
+
+/* =========================
+   PROFILE
+========================= */
+.profile-layout{
+    display:grid;
+    grid-template-columns:290px minmax(0,1fr);
+    gap:17px;
+}
+.profile-summary{padding:26px;text-align:center}
+.profile-avatar{
+    width:83px;height:83px;
+    display:grid;place-items:center;
+    margin:0 auto 15px;
+    border-radius:50%;background:#111;color:#fff;
+    font:800 24px Manrope,sans-serif;
+}
+.profile-summary h3{font:800 17px Manrope,sans-serif}
+.profile-summary>p{margin-top:7px;color:#888;font-size:11px}
+.profile-badge{
+    display:inline-flex;align-items:center;gap:7px;
+    margin-top:14px;padding:8px 10px;
+    background:#f1f1f1;border-radius:6px;font-size:9px;font-weight:700;
+}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:25px}
+.profile-stat{padding:13px;background:#f6f6f6;border-radius:9px}
+.profile-stat strong{display:block;font:800 20px Manrope,sans-serif}
+.profile-stat span{display:block;margin-top:5px;color:#888;font-size:9px}
+.form-card{padding:23px}
+.form-card h3{font:800 14px Manrope,sans-serif}
+.form-card>p{margin-top:6px;color:#888;font-size:10px;line-height:1.8}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin-top:22px}
+.form-group{display:grid;gap:8px;min-width:0}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:10px;font-weight:700}
+.form-control{
+    width:100%;min-width:0;
+    padding:12px;
+    border:1px solid #e5e5e5;border-radius:8px;
+    outline:0;background:#fff;font-size:11px;
+}
+.form-control:focus{border-color:#777}
+textarea.form-control{min-height:100px;resize:vertical}
+.form-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+/* BOTTOM */
+.footer{
+    display:flex;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;
+    margin-top:35px;padding-top:20px;
+    border-top:1px solid #e4e4e4;
+    color:#999;font-size:10px;
+}
+.footer strong{color:#333}
+.empty-state{display:none;padding:35px;text-align:center;color:#888;font-size:12px}
+
+/* TOAST */
+.toast{
+    position:fixed;right:24px;bottom:24px;z-index:300;
+    display:flex;align-items:center;gap:11px;
+    max-width:calc(100vw - 30px);
+    padding:15px 18px;
+    background:#111;color:#fff;
+    border-radius:10px;
+    box-shadow:0 10px 30px #0002;
+    font-size:11px;
+    opacity:0;transform:translateY(12px);pointer-events:none;
+    transition:.25s;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* MOBILE NAV OVERLAY */
+.mobile-overlay{
+    position:fixed;inset:0;
+    background:#0008;z-index:90;display:none;
+}
+.mobile-overlay.show{display:block}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:1200px){
+    :root{--sidebar-width:240px}
+    .content{padding:27px 23px 35px}
+    .topbar{padding:0 23px}
+    .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:850px){
+    .sidebar{width:280px;transform:translateX(-100%)}
+    .sidebar.open{transform:translateX(0)}
+    .main{margin-left:0}
+    .mobile-menu{display:grid}
+    .topbar{height:67px;padding:0 20px}
+    .content{padding:24px 20px 35px}
+    .dashboard-grid{grid-template-columns:1fr}
+    .profile-layout{grid-template-columns:1fr}
+    .profile-summary{
+        display:grid;grid-template-columns:auto 1fr;
+        text-align:left;align-items:center;column-gap:18px;
+    }
+    .profile-avatar{grid-row:span 3;margin:0;width:70px;height:70px}
+    .profile-summary h3{align-self:end}
+    .profile-summary>p{align-self:start}
+    .profile-badge{justify-self:start;margin-top:5px}
+    .profile-stats{grid-column:1/-1}
+}
+@media(max-width:600px){
+    .topbar{padding:0 12px;gap:9px}
+    .content{padding:21px 13px 28px}
+    .breadcrumb{font-size:10px}
+    .search-box{width:35px;padding:0;justify-content:center;border:0;background:transparent}
+    .search-box input{display:none}
+    .search-box i{font-size:15px}
+    .topbar-right{gap:7px}
+    .icon-button{width:34px;height:34px}
+    .top-avatar{width:33px;height:33px}
+    .page-heading{align-items:flex-start;flex-direction:column;gap:14px}
+    .page-heading>.button{width:100%}
+    .welcome-banner{grid-template-columns:1fr;padding:23px 20px}
+    .welcome-banner:after{right:-7px;top:20%;font-size:140px}
+    .welcome-banner h2{font-size:27px}
+    .welcome-side{
+        align-items:flex-start;text-align:left;
+        margin-top:10px;padding-top:15px;
+        border-top:1px solid #303030;
+    }
+    .welcome-side strong{font-size:25px}
+    .stats-grid{gap:10px}
+    .stat-card{padding:14px}
+    .stat-value{font-size:23px;margin-top:13px}
+    .stat-label{font-size:10px}
+    .stat-icon{width:30px;height:30px}
+    .quick-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .quick-action{padding:14px 12px}
+    .portfolio-grid,.services-grid{grid-template-columns:1fr}
+    .portfolio-image{height:220px}
+    .section-heading{align-items:flex-start}
+    .card-header,.card-body{padding-left:14px;padding-right:14px}
+    .project-row{grid-template-columns:40px minmax(0,1fr);gap:10px}
+    .project-thumb{width:40px;height:40px}
+    .project-info strong{font-size:10px}
+    .project-row .status{grid-column:2;justify-self:start}
+    .form-grid{grid-template-columns:1fr}
+    .form-group.full{grid-column:auto}
+    .form-card{padding:18px}
+    .footer{flex-direction:column}
+    .filter-row{gap:6px}
+    .filter-btn{padding:9px 10px}
+    .profile-summary{padding:19px}
+    .table-toolbar>*{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
+        scroll-behavior:auto!important;
+    }
+}
+
+
+
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .brand-logo img {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar" id="sidebar">
+
+ 
+<a href="user-dashboard.html" class="brand-logo" aria-label="Home">
+    <img src="assets/logo.webp" alt="Pixelcraft Logo">
+</a>
+
+
+
+    <button class="workspace" data-page="dashboard">
+        <span class="workspace-icon"><i class="fa-solid fa-layer-group"></i></span>
+        <span class="workspace-text">
+            <strong>Creative Workspace</strong>
+            <small>Personal dashboard</small>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:#888"></i>
+    </button>
+
+    <div class="sidebar-label">WORKSPACE</div>
+
+    <nav class="nav-list" aria-label="Dashboard navigation">
+        <button class="nav-link active" data-page="dashboard">
+            <i class="fa-solid fa-house"></i> Dashboard
+        </button>
+
+        <button class="nav-link" data-page="portfolio">
+            <i class="fa-regular fa-images"></i> My Portfolio
+            <span class="nav-count">06</span>
+        </button>
+
+        <button class="nav-link" data-page="projects">
+            <i class="fa-solid fa-folder-open"></i> Projects
+            <span class="nav-count">08</span>
+        </button>
+
+        <button class="nav-link" data-page="services">
+            <i class="fa-solid fa-shapes"></i> Services
+        </button>
+
+        <button class="nav-link" data-page="profile">
+            <i class="fa-regular fa-user"></i> My Profile
+        </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+
+       
+
+        <!-- LOGOUT GOES TO 404 -->
+        <a href="index.html" class="logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Logout
+        </a>
+
+        <div class="sidebar-user">
+            <div class="avatar">PC</div>
+            <div class="sidebar-user-info">
+                <strong>Creative Member</strong>
+                <small> account</small>
+            </div>
+            <button data-go404 aria-label="Account options">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
+        </div>
+
+    </div>
+</aside>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+
+    <header class="topbar">
+
+        <button class="mobile-menu" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="breadcrumb">
+            Workspace / <strong id="breadcrumbPage">Dashboard</strong>
+        </div>
+
+        <div class="topbar-right">
+
+            <label class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="globalSearch" placeholder="Search anything..." aria-label="Search dashboard">
+            </label>
+
+            <button class="icon-button" data-go404 aria-label="Notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot"></span>
+            </button>
+
+            <button class="top-avatar" data-go404 aria-label="Account">PC</button>
+
+        </div>
+    </header>
+
+    <div class="content">
+
+        <!-- ================= DASHBOARD ================= -->
+        <section class="page-section active" id="dashboard">
+
+            <div class="page-heading">
+                <div>
+                    <div class="eyebrow">YOUR CREATIVE WORKSPACE · 2026</div>
+                    <h1>Good morning, Creator.</h1>
+                    <p>Keep your ideas moving. Here's an overview of your creative workspace.</p>
+                </div>
+
+                <button class="button button-dark" data-go404>
+                    <i class="fa-solid fa-plus"></i> Create New Project
+                </button>
+            </div>
+
+            <div class="welcome-banner">
+                <div class="welcome-copy">
+                    <div class="welcome-tag">
+                        <span></span> YOUR CREATIVE SPACE
+                    </div>
+
+                    <h2>Make something<br>worth remembering.</h2>
+
+                    <p>
+                        Every great project starts with a small idea.
+                        Organise your work, track your progress and build
+                        a portfolio that speaks for itself.
+                    </p>
+
+                    <div class="welcome-actions">
+                        <button class="button button-light" data-go404>
+                            Explore Portfolio <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <button class="button" style="background:transparent;color:#fff;border-color:#444" data-go404>
+                            View Projects
+                        </button>
+                    </div>
+                </div>
+
+                <div class="welcome-side">
+                    <small>YOUR CREATIVE JOURNEY</small>
+                    <strong>01 — 08</strong>
+                    <span>Projects managed this season</span>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Total Projects</span>
+                        <span class="stat-icon"><i class="fa-solid fa-folder"></i></span>
+                    </div>
+                    <div class="stat-value">08</div>
+                    <div class="stat-foot"><strong>03 active</strong> projects in progress</div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Portfolio Works</span>
+                        <span class="stat-icon"><i class="fa-regular fa-images"></i></span>
+                    </div>
+                    <div class="stat-value">06</div>
+                    <div class="stat-foot"><strong>06 published</strong> creative pieces</div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Completed</span>
+                        <span class="stat-icon"><i class="fa-solid fa-check"></i></span>
+                    </div>
+                    <div class="stat-value">05</div>
+                    <div class="stat-foot"><strong>62.5%</strong> completion rate</div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Creative Services</span>
+                        <span class="stat-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    </div>
+                    <div class="stat-value">06</div>
+                    <div class="stat-foot">Creative capabilities available</div>
+                </article>
+
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="section-heading">
+                <div>
+                    <h2>Quick actions</h2>
+                    <p>Jump straight into your next task.</p>
+                </div>
+            </div>
+
+            <div class="quick-grid">
+                <button class="quick-action" data-go404>
+                    <i class="fa-solid fa-plus"></i>
+                    <strong>New Project</strong>
+                    <span>Plan your next idea</span>
+                </button>
+
+                <button class="quick-action" data-go404>
+                    <i class="fa-regular fa-images"></i>
+                    <strong>My Portfolio</strong>
+                    <span>Browse creative work</span>
+                </button>
+
+                <button class="quick-action" data-go404>
+                    <i class="fa-solid fa-shapes"></i>
+                    <strong>Explore Services</strong>
+                    <span>Discover capabilities</span>
+                </button>
+
+                <button class="quick-action" data-go404>
+                    <i class="fa-regular fa-user"></i>
+                    <strong>Edit Profile</strong>
+                    <span>Update your details</span>
+                </button>
+            </div>
+
+            <!-- PROJECT OVERVIEW -->
+            <div class="section-heading">
+                <div>
+                    <h2>Workspace overview</h2>
+                    <p>Your recent work and latest activity.</p>
+                </div>
+                <button class="text-link" data-go404>
+                    View all projects <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="dashboard-grid">
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Recent projects</h3>
+                            <p>Latest updates from your workspace</p>
+                        </div>
+                        <button class="button button-light button-small" data-go404>View all</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="project-list">
+
+                            <div class="project-row" data-searchable data-search-text="monochrome identity branding">
+                                <div class="project-thumb">
+                                    <img src="assets/a2.webp" alt="Monochrome identity project">
+                                </div>
+                                <div class="project-info">
+                                    <strong>Monochrome Identity</strong>
+                                    <span>Branding · Updated today</span>
+                                </div>
+                                <span class="status">In progress</span>
+                            </div>
+
+                            <div class="project-row" data-searchable data-search-text="atelier digital website">
+                                <div class="project-thumb">
+                                    <img src="assets/a3.webp" alt="Atelier digital project">
+                                </div>
+                                <div class="project-info">
+                                    <strong>Atelier Digital</strong>
+                                    <span>Web design · Updated yesterday</span>
+                                </div>
+                                <span class="status review">In review</span>
+                            </div>
+
+                            <div class="project-row" data-searchable data-search-text="objects of note editorial">
+                                <div class="project-thumb">
+                                    <img src="assets/a5.jpg" alt="Objects of Note project">
+                                </div>
+                                <div class="project-info">
+                                    <strong>Objects of Note</strong>
+                                    <span>Editorial · Updated 2 days ago</span>
+                                </div>
+                                <span class="status">Completed</span>
+                            </div>
+
+                            <div class="project-row" data-searchable data-search-text="form function ecommerce">
+                                <div class="project-thumb">
+                                    <img src="assets/c3.webp" alt="Form and Function project">
+                                </div>
+                                <div class="project-info">
+                                    <strong>Form &amp; Function</strong>
+                                    <span>E-commerce · Updated 4 days ago</span>
+                                </div>
+                                <span class="status pending">Planning</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Project progress</h3>
+                            <p>Current workspace completion</p>
+                        </div>
+                        <i class="fa-solid fa-chart-simple" style="color:#888"></i>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="progress-item">
+                            <div class="progress-label"><strong>Brand identity</strong><span>85%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:85%"></div></div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-label"><strong>Web design</strong><span>68%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:68%"></div></div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-label"><strong>Editorial design</strong><span>100%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-label"><strong>Campaign concept</strong><span>42%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width:42%"></div></div>
+                        </div>
+
+                        <button class="button button-dark" style="width:100%" data-go404>
+                            Manage projects <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- ACTIVITY -->
+            <div class="section-heading">
+                <div>
+                    <h2>Recent activity</h2>
+                    <p>A quick look at what has been happening.</p>
+                </div>
+                <button class="text-link" data-go404>View activity <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <article class="card">
+                <div class="card-body">
+                    <div class="activity-list">
+
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fa-solid fa-check"></i></div>
+                            <div class="activity-text">
+                                <strong>Objects of Note</strong> marked as completed.
+                                <time>Today · 10:24 AM</time>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fa-regular fa-image"></i></div>
+                            <div class="activity-text">
+                                A new visual was added to <strong>Monochrome Identity.</strong>
+                                <time>Yesterday · 04:15 PM</time>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fa-regular fa-folder-open"></i></div>
+                            <div class="activity-text">
+                                <strong>Atelier Digital</strong> moved to review stage.
+                                <time>2 days ago · 11:30 AM</time>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                            <div class="activity-text">
+                                A new design direction was prepared for <strong>Form &amp; Function.</strong>
+                                <time>4 days ago · 02:45 PM</time>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+
+            <!-- DASHBOARD INSIGHTS -->
+            <div class="section-heading">
+                <div>
+                    <h2>Creative insights</h2>
+                    <p>Keep your creative process moving forward.</p>
+                </div>
+            </div>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-regular fa-lightbulb"></i></div>
+                    <div class="service-number">INSIGHT / 001</div>
+                    <h3>Start with the idea</h3>
+                    <p>Strong creative work begins with a clear purpose. Define the problem before deciding how it should look.</p>
+                    <div class="service-footer">
+                        <span>Creative thinking</span>
+                        <button data-go404>Read more <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-bezier-curve"></i></div>
+                    <div class="service-number">INSIGHT / 002</div>
+                    <h3>Make every detail count</h3>
+                    <p>Typography, spacing, composition and consistency help transform an ordinary design into a memorable one.</p>
+                    <div class="service-footer">
+                        <span>Design principles</span>
+                        <button data-go404>Read more <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="service-number">INSIGHT / 003</div>
+                    <h3>Show the process</h3>
+                    <p>Document concepts, iterations and decisions. A thoughtful process makes the final result more meaningful.</p>
+                    <div class="service-footer">
+                        <span>Portfolio growth</span>
+                        <button data-go404>Read more <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </article>
+            </div>
+
+        </section>
+
+        <!-- ================= PORTFOLIO ================= -->
+        <section class="page-section" id="portfolio">
+
+            <div class="page-heading">
+                <div>
+                    <div class="eyebrow">YOUR CREATIVE COLLECTION</div>
+                    <h1>My Portfolio.</h1>
+                    <p>A curated selection of design work, experiments and finished projects.</p>
+                </div>
+                <button class="button button-dark" data-go404>
+                    <i class="fa-solid fa-plus"></i> Add Portfolio Work
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-label">Published works</div>
+                    <div class="stat-value">06</div>
+                    <div class="stat-foot">Across multiple disciplines</div>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-label">Categories</div>
+                    <div class="stat-value">04</div>
+                    <div class="stat-foot">Brand, web, editorial and digital</div>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-label">Featured projects</div>
+                    <div class="stat-value">03</div>
+                    <div class="stat-foot">Highlighted creative work</div>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-label">Archive</div>
+                    <div class="stat-value">2024–26</div>
+                    <div class="stat-foot">Three years of creative work</div>
+                </article>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Selected work</h2>
+                    <p>Creative projects across branding, digital and editorial design.</p>
+                </div>
+                <button class="text-link" data-go404>View complete archive <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <div class="portfolio-grid">
+
+                <article class="portfolio-card" data-searchable data-search-text="monochrome identity branding">
+                    <div class="portfolio-image">
+                        <img src="assets/h2.webp" alt="Monochrome Identity" loading="lazy">
+                        <span class="portfolio-number">01 / 06</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-meta">Branding · 2026</div>
+                        <h3>Monochrome Identity</h3>
+                        <p>A confident visual system built around typography, structure and simplicity.</p>
+                        <div class="portfolio-bottom">
+                            <span class="status">Featured</span>
+                            <button class="round-action" data-go404 aria-label="View Monochrome Identity">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="portfolio-card" data-searchable data-search-text="atelier digital website">
+                    <div class="portfolio-image">
+                        <img src="assets/h3.webp" alt="Atelier Digital" loading="lazy">
+                        <span class="portfolio-number">02 / 06</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-meta">Digital · 2026</div>
+                        <h3>Atelier Digital</h3>
+                        <p>A refined digital experience combining intuitive navigation and visual storytelling.</p>
+                        <div class="portfolio-bottom">
+                            <span class="status">Published</span>
+                            <button class="round-action" data-go404 aria-label="View Atelier Digital">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="portfolio-card" data-searchable data-search-text="objects of note editorial">
+                    <div class="portfolio-image">
+                        <img src="assets/a7.jpg" alt="Objects of Note" loading="lazy">
+                        <span class="portfolio-number">03 / 06</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-meta">Editorial · 2025</div>
+                        <h3>Objects of Note</h3>
+                        <p>An editorial direction that gives everyday objects a distinctive visual voice.</p>
+                        <div class="portfolio-bottom">
+                            <span class="status">Published</span>
+                            <button class="round-action" data-go404 aria-label="View Objects of Note">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="portfolio-card" data-searchable data-search-text="good trouble campaign">
+                    <div class="portfolio-image">
+                        <img src="assets/c4.webp" alt="Good Trouble campaign" loading="lazy">
+                        <span class="portfolio-number">04 / 06</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-meta">Campaign · 2025</div>
+                        <h3>Good Trouble</h3>
+                        <p>A bold campaign concept designed to challenge conventions and spark attention.</p>
+                        <div class="portfolio-bottom">
+                            <span class="status">Featured</span>
+                            <button class="round-action" data-go404 aria-label="View Good Trouble">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="portfolio-card" data-searchable data-search-text="form function brand identity">
+                    <div class="portfolio-image">
+                        <img src="assets/h6.webp" alt="Form and Function" loading="lazy">
+                        <span class="portfolio-number">05 / 06</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-meta">Branding · 2025</div>
+                        <h3>Form &amp; Function</h3>
+                        <p>A modern identity for a design-minded product and lifestyle brand.</p>
+                        <div class="portfolio-bottom">
+                            <span class="status">Published</span>
+                            <button class="round-action" data-go404 aria-label="View Form and Function">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="portfolio-card" data-searchable data-search-text="after hours digital experience">
+                    <div class="portfolio-image">
+                        <img src="assets/h5.webp" alt="After Hours" loading="lazy">
+                        <span class="portfolio-number">06 / 06</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-meta">Digital · 2024</div>
+                        <h3>After Hours</h3>
+                        <p>A nightlife-inspired digital concept with expressive layouts and clear content.</p>
+                        <div class="portfolio-bottom">
+                            <span class="status">Featured</span>
+                            <button class="round-action" data-go404 aria-label="View After Hours">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Build your next case study</h2>
+                    <p>Every new project is an opportunity to show how you think.</p>
+                </div>
+                <button class="button button-dark" data-go404>Start a case study <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <div class="welcome-banner">
+                <div class="welcome-copy">
+                    <div class="welcome-tag"><span></span> NEXT UP</div>
+                    <h2>Your next favourite project starts here.</h2>
+                    <p>Bring your ideas together, explore new directions and turn the work into a compelling story.</p>
+                    <div class="welcome-actions">
+                        <button class="button button-light" data-go404>Create New Work <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="welcome-side">
+                    <small>KEEP CREATING</small>
+                    <strong>Always.</strong>
+                    <span>Make the next one count.</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PROJECTS ================= -->
+        <section class="page-section" id="projects">
+
+            <div class="page-heading">
+                <div>
+                    <div class="eyebrow">PLAN · CREATE · DELIVER</div>
+                    <h1>Project Workspace.</h1>
+                    <p>Keep every creative assignment organised, from first concept to final delivery.</p>
+                </div>
+                <button class="button button-dark" data-go404>
+                    <i class="fa-solid fa-plus"></i> Add Project
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card"><div class="stat-label">All projects</div><div class="stat-value">08</div><div class="stat-foot">Across your workspace</div></article>
+                <article class="stat-card"><div class="stat-label">In progress</div><div class="stat-value">03</div><div class="stat-foot">Currently in development</div></article>
+                <article class="stat-card"><div class="stat-label">In review</div><div class="stat-value">01</div><div class="stat-foot">Awaiting feedback</div></article>
+                <article class="stat-card"><div class="stat-label">Completed</div><div class="stat-value">05</div><div class="stat-foot">Successfully delivered</div></article>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>All projects</h2>
+                    <p>Overview of your creative assignments and delivery stages.</p>
+                </div>
+                <button class="text-link" data-go404>Export report <i class="fa-solid fa-download"></i></button>
+            </div>
+
+            <div class="table-toolbar">
+                <label class="table-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="projectSearch" placeholder="Search projects..." aria-label="Search projects">
+                </label>
+                <select class="select-control" id="projectStatusFilter" aria-label="Filter status">
+                    <option value="all">All statuses</option>
+                    <option value="in progress">In progress</option>
+                    <option value="in review">In review</option>
+                    <option value="completed">Completed</option>
+                    <option value="planning">Planning</option>
+                </select>
+                <button class="button button-light" data-go404>
+                    <i class="fa-solid fa-sliders"></i> More filters
+                </button>
+            </div>
+
+            <article class="card">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Category</th>
+                                <th>Updated</th>
+                                <th>Status</th>
+                                <th>Progress</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectsTable">
+
+                            <tr data-searchable data-search-text="monochrome identity branding" data-status="in progress">
+                                <td><div class="table-project"><img src="assets/images/project-01.webp" alt=""><div><strong>Monochrome Identity</strong><small>PC-001</small></div></div></td>
+                                <td>Branding</td><td>Oct 26, 2026</td><td><span class="status">In progress</span></td><td>85%</td>
+                                <td><button class="table-action" data-go404 aria-label="Open Monochrome Identity"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+                            </tr>
+
+                            <tr data-searchable data-search-text="atelier digital website design" data-status="in review">
+                                <td><div class="table-project"><img src="assets/images/project-02.webp" alt=""><div><strong>Atelier Digital</strong><small>PC-002</small></div></div></td>
+                                <td>Web design</td><td>Oct 25, 2026</td><td><span class="status review">In review</span></td><td>68%</td>
+                                <td><button class="table-action" data-go404 aria-label="Open Atelier Digital"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+                            </tr>
+
+                            <tr data-searchable data-search-text="objects of note editorial" data-status="completed">
+                                <td><div class="table-project"><img src="assets/images/project-03.webp" alt=""><div><strong>Objects of Note</strong><small>PC-003</small></div></div></td>
+                                <td>Editorial</td><td>Oct 24, 2026</td><td><span class="status">Completed</span></td><td>100%</td>
+                                <td><button class="table-action" data-go404 aria-label="Open Objects of Note"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+                            </tr>
+
+                            <tr data-searchable data-search-text="form function digital" data-status="planning">
+                                <td><div class="table-project"><img src="assets/images/project-04.webp" alt=""><div><strong>Form &amp; Function</strong><small>PC-004</small></div></div></td>
+                                <td>Digital</td><td>Oct 22, 2026</td><td><span class="status pending">Planning</span></td><td>20%</td>
+                                <td><button class="table-action" data-go404 aria-label="Open Form and Function"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+                            </tr>
+
+                            <tr data-searchable data-search-text="good trouble campaign" data-status="in progress">
+                                <td><div class="table-project"><img src="assets/images/project-05.webp" alt=""><div><strong>Good Trouble</strong><small>PC-005</small></div></div></td>
+                                <td>Campaign</td><td>Oct 20, 2026</td><td><span class="status">In progress</span></td><td>42%</td>
+                                <td><button class="table-action" data-go404 aria-label="Open Good Trouble"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+                            </tr>
+
+                            <tr data-searchable data-search-text="after hours digital" data-status="completed">
+                                <td><div class="table-project"><img src="assets/images/project-06.webp" alt=""><div><strong>After Hours</strong><small>PC-006</small></div></div></td>
+                                <td>Digital</td><td>Oct 18, 2026</td><td><span class="status">Completed</span></td><td>100%</td>
+                                <td><button class="table-action" data-go404 aria-label="Open After Hours"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-state" id="projectEmpty">No projects match your search.</div>
+            </article>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Project workflow</h2>
+                    <p>A clear process for consistent creative delivery.</p>
+                </div>
+            </div>
+
+            <div class="quick-grid">
+                <button class="quick-action" data-go404><i class="fa-regular fa-lightbulb"></i><strong>01. Discover</strong><span>Research and define the idea</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-pen-ruler"></i><strong>02. Design</strong><span>Explore concepts and direction</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-code"></i><strong>03. Develop</strong><span>Build and refine the solution</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-check-double"></i><strong>04. Deliver</strong><span>Review and finalise the work</span></button>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Project resources</h2>
+                    <p>Keep your work organised and ready for the next milestone.</p>
+                </div>
+            </div>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-regular fa-file-lines"></i></div>
+                    <div class="service-number">RESOURCE / 001</div>
+                    <h3>Project Briefs</h3>
+                    <p>Document project objectives, audience, scope, creative requirements and expected outcomes.</p>
+                    <div class="service-footer"><span>Planning resources</span><button data-go404>Open <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-regular fa-images"></i></div>
+                    <div class="service-number">RESOURCE / 002</div>
+                    <h3>Creative Assets</h3>
+                    <p>Keep references, visual directions and project imagery organised in one place.</p>
+                    <div class="service-footer"><span>Visual resources</span><button data-go404>Browse <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div class="service-number">RESOURCE / 003</div>
+                    <h3>Milestones</h3>
+                    <p>Track important stages and organise the tasks needed to deliver a project successfully.</p>
+                    <div class="service-footer"><span>Project planning</span><button data-go404>Review <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+            </div>
+
+        </section>
+
+        <!-- ================= SERVICES ================= -->
+        <section class="page-section" id="services">
+
+            <div class="page-heading">
+                <div>
+                    <div class="eyebrow">CREATIVE CAPABILITIES</div>
+                    <h1>Services &amp; Expertise.</h1>
+                    <p>Creative thinking and thoughtful execution for brands that want to stand apart.</p>
+                </div>
+                <button class="button button-dark" data-go404><i class="fa-solid fa-plus"></i> Request a Service</button>
+            </div>
+
+            <div class="welcome-banner">
+                <div class="welcome-copy">
+                    <div class="welcome-tag"><span></span> FROM FIRST THOUGHT TO FINAL PIXEL</div>
+                    <h2>Good design is not decoration. It is direction.</h2>
+                    <p>We combine strategy, visual design and digital craft to turn complex ideas into clear, engaging experiences.</p>
+                    <div class="welcome-actions">
+                        <button class="button button-light" data-go404>Start a project <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="button" style="background:transparent;color:#fff;border-color:#444" data-go404>View capabilities</button>
+                    </div>
+                </div>
+                <div class="welcome-side">
+                    <small>OUR APPROACH</small>
+                    <strong>Think. Make.</strong>
+                    <span>Test, refine and deliver.</span>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>What we do</h2>
+                    <p>Strategy, design and digital experiences built around your goals.</p>
+                </div>
+            </div>
+
+            <div class="services-grid">
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-fingerprint"></i></div>
+                    <div class="service-number">SERVICE / 001</div>
+                    <h3>Brand Strategy &amp; Identity</h3>
+                    <p>Build a clear and memorable brand system that expresses your purpose, personality and point of view.</p>
+                    <div class="service-tags"><span>Brand strategy</span><span>Visual identity</span><span>Guidelines</span></div>
+                    <div class="service-footer"><span>Strategy · Identity</span><button data-go404>Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-display"></i></div>
+                    <div class="service-number">SERVICE / 002</div>
+                    <h3>Web &amp; Digital Experiences</h3>
+                    <p>Thoughtful digital products and websites with intuitive journeys, responsive layouts and strong visual systems.</p>
+                    <div class="service-tags"><span>Web design</span><span>UI/UX</span><span>Prototyping</span></div>
+                    <div class="service-footer"><span>Digital · Experience</span><button data-go404>Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-clapperboard"></i></div>
+                    <div class="service-number">SERVICE / 003</div>
+                    <h3>Campaigns &amp; Content</h3>
+                    <p>Create compelling visual stories and campaign assets that connect ideas with the right audience.</p>
+                    <div class="service-tags"><span>Art direction</span><span>Social content</span><span>Campaigns</span></div>
+                    <div class="service-footer"><span>Content · Communication</span><button data-go404>Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
+                    <div class="service-number">SERVICE / 004</div>
+                    <h3>Motion &amp; Visual Worlds</h3>
+                    <p>Bring concepts to life through motion systems, visual experiments and immersive digital compositions.</p>
+                    <div class="service-tags"><span>Motion design</span><span>3D concepts</span><span>Visuals</span></div>
+                    <div class="service-footer"><span>Motion · Art direction</span><button data-go404>Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                    <div class="service-number">SERVICE / 005</div>
+                    <h3>Editorial &amp; Print</h3>
+                    <p>Combine typography, layout and visual hierarchy to create purposeful editorial and print experiences.</p>
+                    <div class="service-tags"><span>Editorial</span><span>Typography</span><span>Print</span></div>
+                    <div class="service-footer"><span>Print · Publication</span><button data-go404>Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+                    <div class="service-number">SERVICE / 006</div>
+                    <h3>Creative Direction</h3>
+                    <p>Establish a cohesive creative vision and keep every touchpoint aligned with your brand's goals.</p>
+                    <div class="service-tags"><span>Concepts</span><span>Direction</span><span>Consulting</span></div>
+                    <div class="service-footer"><span>Concept · Strategy</span><button data-go404>Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Our creative process</h2>
+                    <p>Four steps that turn an idea into a complete experience.</p>
+                </div>
+            </div>
+
+            <div class="quick-grid">
+                <button class="quick-action" data-go404><i class="fa-regular fa-comments"></i><strong>01. Discover</strong><span>Understand your goals and audience.</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-lightbulb"></i><strong>02. Define</strong><span>Shape a focused creative direction.</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-pen-ruler"></i><strong>03. Create</strong><span>Design, develop and refine.</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-rocket"></i><strong>04. Deliver</strong><span>Launch and review the final work.</span></button>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Ready to make something different?</h2>
+                    <p>Bring your idea to the table and let's explore what it can become.</p>
+                </div>
+                <button class="button button-dark" data-go404>Discuss a project <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+        </section>
+
+        <!-- ================= PROFILE ================= -->
+        <section class="page-section" id="profile">
+
+            <div class="page-heading">
+                <div>
+                    <div class="eyebrow">YOUR ACCOUNT</div>
+                    <h1>My Profile.</h1>
+                    <p>Manage your profile details and creative preferences.</p>
+                </div>
+                <button class="button button-dark" data-go404><i class="fa-solid fa-pen"></i> Edit Account</button>
+            </div>
+
+            <div class="profile-layout">
+
+                <article class="card profile-summary">
+                    <div class="profile-avatar">PC</div>
+                    <h3>Creative Member</h3>
+                    <p>Designer · Creative workspace</p>
+                    <span class="profile-badge"><i class="fa-solid fa-circle-check"></i> Active profile</span>
+
+                    <div class="profile-stats">
+                        <div class="profile-stat"><strong>08</strong><span>Projects</span></div>
+                        <div class="profile-stat"><strong>06</strong><span>Portfolio works</span></div>
+                        <div class="profile-stat"><strong>06</strong><span>Services</span></div>
+                        <div class="profile-stat"><strong>2026</strong><span>Member since</span></div>
+                    </div>
+
+                    <button class="button button-dark" style="width:100%;margin-top:20px" data-go404>
+                        View Public Profile <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </article>
+
+                <article class="card form-card">
+                    <h3>Personal information</h3>
+                    <p>Review your account information and profile details.</p>
+
+                    <form id="profileForm">
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="profileName">Full name</label>
+                                <input class="form-control" id="profileName" value="Creative Member" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileRole">Professional title</label>
+                                <input class="form-control" id="profileRole" value="Frontend Designer">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileEmail">Email address</label>
+                                <input class="form-control" id="profileEmail" type="email" placeholder="hello@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profilePhone">Phone number</label>
+                                <input class="form-control" id="profilePhone" type="tel" inputmode="numeric" pattern="[0-9]{10,15}" placeholder="Enter phone number">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileLocation">Location</label>
+                                <input class="form-control" id="profileLocation" placeholder="City, Country">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileWebsite">Portfolio website</label>
+                                <input class="form-control" id="profileWebsite" type="url" placeholder="https://yourportfolio.com">
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="profileBio">About you</label>
+                                <textarea class="form-control" id="profileBio" placeholder="Write a short introduction about your creative work..."></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="button button-light" type="reset">Reset fields</button>
+                            <button class="button button-dark" type="submit">Save Changes <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </form>
+                </article>
+
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Account preferences</h2>
+                    <p>Manage your general workspace preferences.</p>
+                </div>
+            </div>
+
+            <div class="services-grid">
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="service-number">ACCOUNT / 001</div>
+                    <h3>Notifications</h3>
+                    <p>Review project updates and keep track of important workspace activity.</p>
+                    <div class="service-footer"><span>Workspace updates</span><button data-go404>Manage <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="service-number">ACCOUNT / 002</div>
+                    <h3>Privacy &amp; Security</h3>
+                    <p>Review account guidance and keep your profile information up to date.</p>
+                    <div class="service-footer"><span>Account security</span><button data-go404>Review <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fa-regular fa-circle-question"></i></div>
+                    <div class="service-number">ACCOUNT / 003</div>
+                    <h3>Help &amp; Support</h3>
+                    <p>Find guidance for using the dashboard and organising your creative workspace.</p>
+                    <div class="service-footer"><span>Dashboard help</span><button data-go404>Get help <i class="fa-solid fa-arrow-right"></i></button></div>
+                </article>
+
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Account actions</h2>
+                    <p>Access additional account options.</p>
+                </div>
+            </div>
+
+            <div class="quick-grid">
+                <button class="quick-action" data-go404><i class="fa-solid fa-lock"></i><strong>Change Password</strong><span>Update account credentials</span></button>
+                <button class="quick-action" data-go404><i class="fa-regular fa-envelope"></i><strong>Email Preferences</strong><span>Manage communication settings</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-shield-halved"></i><strong>Security Settings</strong><span>Review account security</span></button>
+                <button class="quick-action" data-go404><i class="fa-solid fa-arrow-right-from-bracket"></i><strong>Logout</strong><span>Leave your workspace</span></button>
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>© 2026 <strong>PIXELCRAFT STUDIO.</strong> All rights reserved.</span>
+            <span>Made with intention. Designed for creators.</span>
+        </footer>
+
+    </div>
+</main>
+</div>
+
+<script>
+(() => {
+    "use strict";
+
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("mobileOverlay");
+    const menuToggle = document.getElementById("menuToggle");
+    const breadcrumbPage = document.getElementById("breadcrumbPage");
+    const globalSearch = document.getElementById("globalSearch");
+
+    const pageNames = {
+        dashboard: "Dashboard",
+        portfolio: "My Portfolio",
+        projects: "Projects",
+        services: "Services",
+        profile: "My Profile"
+    };
+
+    /*
+      IMPORTANT:
+      1. Sidebar navigation buttons switch sections inside this dashboard.
+      2. Every other button/link inside the main content goes to 404.html.
+      3. Logout links directly to 404.html.
+    */
+
+    function closeMobileMenu() {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+        menuToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+
+    function openMobileMenu() {
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+        menuToggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+
+    function navigateTo(page) {
+        const target = document.getElementById(page);
+        if (!target) return;
+
+        document.querySelectorAll(".page-section").forEach(section => {
+            section.classList.toggle("active", section.id === page);
+        });
+
+        document.querySelectorAll(".nav-link[data-page]").forEach(button => {
+            const isActive = button.dataset.page === page;
+            button.classList.toggle("active", isActive);
+
+            if (isActive) {
+                button.setAttribute("aria-current", "page");
+            } else {
+                button.removeAttribute("aria-current");
+            }
+        });
+
+        breadcrumbPage.textContent = pageNames[page] || "Dashboard";
+
+        if (globalSearch) globalSearch.value = "";
+
+        document.querySelectorAll("[data-searchable]").forEach(item => {
+            item.style.display = "";
+        });
+
+        const projectSearch = document.getElementById("projectSearch");
+        const projectStatusFilter = document.getElementById("projectStatusFilter");
+
+        if (projectSearch) projectSearch.value = "";
+        if (projectStatusFilter) projectStatusFilter.value = "all";
+
+        document.querySelectorAll("#projectsTable tr").forEach(row => {
+            row.style.display = "";
+        });
+
+        const empty = document.getElementById("projectEmpty");
+        if (empty) empty.style.display = "none";
+
+        closeMobileMenu();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /*
+      SIDEBAR:
+      Only sidebar navigation items with data-page switch content.
+      The sidebar's other buttons are redirected to 404.html.
+    */
+    sidebar.addEventListener("click", event => {
+        const navButton = event.target.closest(".nav-link[data-page]");
+
+        if (navButton) {
+            event.preventDefault();
+            navigateTo(navButton.dataset.page);
+            return;
+        }
+
+        const pageButton = event.target.closest("[data-page]");
+
+        if (pageButton) {
+            event.preventDefault();
+            navigateTo(pageButton.dataset.page);
+            return;
+        }
+
+        const redirectButton = event.target.closest("[data-go404]");
+
+        if (redirectButton) {
+            event.preventDefault();
+            window.location.href = "404.html";
+        }
+    });
+
+    /*
+      MAIN CONTENT:
+      Any button or link clicked inside any content section
+      opens the existing 404.html page.
+    */
+    document.querySelector(".content").addEventListener("click", event => {
+        const clickable = event.target.closest("a, button");
+
+        if (!clickable) return;
+
+        // Sidebar navigation is outside .content, so it is unaffected.
+        event.preventDefault();
+        window.location.href = "404.html";
+    });
+
+    // Header search, notification and avatar also go to 404.
+    document.querySelector(".topbar").addEventListener("click", event => {
+        const clickable = event.target.closest("button");
+
+        if (!clickable) return;
+
+        if (clickable.id === "menuToggle") return;
+
+        event.preventDefault();
+        window.location.href = "404.html";
+    });
+
+    menuToggle.addEventListener("click", () => {
+        if (sidebar.classList.contains("open")) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    overlay.addEventListener("click", closeMobileMenu);
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeMobileMenu();
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 850) closeMobileMenu();
+    });
+
+    /*
+      Search is visual-only in this static demo.
+      Submitting/clicking a page action redirects to 404.
+    */
+    globalSearch.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            window.location.href = "404.html";
+        }
+    });
+
+})();
+</script>
+
+</body>
+</html>
